@@ -3808,21 +3808,22 @@
         }
     },
     {
-        "id": 215,
-        "en": {
-            "question": "What is the output when the sample code below is executed?",
-            "code": "int main(){\n    int x=10, i;\n    for(i=0; i < x; i+=3){\n        printf(\"One\");\n        continue;\n        printf(\"Two\");\n    }\n    return 0;\n}",
-            "options": ["A. OneOneOneOne", "B. OneTwoOneTwo", "C. OneTwoOneTwoOne", "D. OneTwo"],
-            "answer": "A. OneOneOneOne",
-            "explanation": "The continue statement immediately jumps to the next iteration of the loop, skipping the printf(\"Two\") statement. The loop runs for i = 0, 3, 6, 9 (4 times). Thus, \"One\" is printed 4 times."
-        },
-        "vi": {
-            "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
-            "code": "int main(){\n    int x=10, i;\n    for(i=0; i < x; i+=3){\n        printf(\"One\");\n        continue;\n        printf(\"Two\");\n    }\n    return 0;\n}",
-            "options": ["A. OneOneOneOne", "B. OneTwoOneTwo", "C. OneTwoOneTwoOne", "D. OneTwo"],
-            "answer": "A. OneOneOneOne",
-            "explanation": "Lệnh continue sẽ ngay lập tức nhảy đến lần lặp tiếp theo, bỏ qua lệnh printf(\"Two\"). Vòng lặp chạy khi i = 0, 3, 6, 9 (4 lần). Vậy \"One\" được in 4 lần."
-        }
+    "id": 215,
+    "topic": "Control Flow (Loops/If)",
+    "en": {
+        "question": "What is the output when the sample code below is executed?",
+        "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+        "options": ["9", "8", "12", "10"],
+        "answer": "A",
+        "explanation": "Loop starts with i=9. Condition i<x (9<10) is true. 'printf' prints 9, then i increments to 10. 'break' terminates the loop immediately."
+    },
+    "vi": {
+        "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
+        "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+        "options": ["9", "8", "12", "10"],
+        "answer": "A",
+        "explanation": "Vòng lặp bắt đầu với i=9. Điều kiện i<x (9<10) đúng. Lệnh printf in ra 9, sau đó i tăng lên 10 (do i++). Lệnh break kết thúc vòng lặp ngay lập tức."
+    }
     },
     {
         "id": 216,
@@ -4263,19 +4264,32 @@
         }
     },
     {
-        "id": 243,
-        "en": {
-            "question": "Consider a 3x3 matrix `mat` as shown below. The code snippet is executed to calculate a value named `sum`. Which of the following options correctly describes the value of the sum after executing the code snippet? `int sum = 0; for (int i = 0; i &lt; 3; i++) sum += mat[i][i];`",
-            "options": ["A. The sum of diagonal elements in the matrix", "B. The sum of all elements in the matrix", "C. The sum of non-diagonal elements in the matrix", "D. The sum of elements below the main diagonal in the matrix"],
-            "answer": "A. The sum of diagonal elements in the matrix",
-            "explanation": "The loop iterates with `i` from 0 to 2, and in each step, it adds `mat[i][i]`. This corresponds to the elements `mat[0][0]`, `mat[1][1]`, and `mat[2][2]`, which are the elements on the main diagonal."
-        },
-        "vi": {
-            "question": "Xem xét một ma trận 3x3 `mat` như hình dưới. Đoạn mã được thực thi để tính một giá trị có tên là `sum`. Lựa chọn nào sau đây mô tả đúng giá trị của tổng sau khi thực thi đoạn mã? `int sum = 0; for (int i = 0; i &lt; 3; i++) sum += mat[i][i];`",
-            "options": ["A. Tổng các phần tử trên đường chéo chính trong ma trận", "B. Tổng tất cả các phần tử trong ma trận", "C. Tổng các phần tử không nằm trên đường chéo trong ma trận", "D. Tổng các phần tử dưới đường chéo chính trong ma trận"],
-            "answer": "A. Tổng các phần tử trên đường chéo chính trong ma trận",
-            "explanation": "Vòng lặp lặp với `i` từ 0 đến 2, và trong mỗi bước, nó cộng thêm `mat[i][i]`. Điều này tương ứng với các phần tử `mat[0][0]`, `mat[1][1]`, và `mat[2][2]`, là các phần tử trên đường chéo chính."
-        }
+    "id": 243,
+    "topic": "Arrays & Strings",
+    "en": {
+        "question": "Consider a 3x3 matrix `mat`. The code snippet is executed to calculate a value named `sum`. Which of the following options correctly describes the value of the sum?",
+        "code": "int sum = 0;\nfor (int i = 0; i < 3; i++)\n    sum += mat[i][i];",
+        "options": [
+            "The sum of diagonal elements in the matrix",
+            "The sum of all elements in the matrix",
+            "The sum of non-diagonal elements in the matrix",
+            "The sum of elements below the main diagonal in the matrix"
+        ],
+        "answer": "A",
+        "explanation": "The loop accesses mat[0][0], mat[1][1], mat[2][2]. These indices (where row equals column) correspond to the main diagonal elements."
+    },
+    "vi": {
+        "question": "Xem xét một ma trận 3x3 `mat`. Đoạn mã được thực thi để tính một giá trị có tên là `sum`. Lựa chọn nào sau đây mô tả đúng giá trị của tổng?",
+        "code": "int sum = 0;\nfor (int i = 0; i < 3; i++)\n    sum += mat[i][i];",
+        "options": [
+            "Tổng các phần tử trên đường chéo chính trong ma trận",
+            "Tổng tất cả các phần tử trong ma trận",
+            "Tổng các phần tử không nằm trên đường chéo trong ma trận",
+            "Tổng các phần tử dưới đường chéo chính trong ma trận"
+        ],
+        "answer": "A",
+        "explanation": "Vòng lặp truy cập mat[0][0], mat[1][1], mat[2][2]. Các chỉ số này (hàng bằng cột) tương ứng với các phần tử nằm trên đường chéo chính."
+    }
     },
     {
         "id": 244,
@@ -6169,63 +6183,7 @@
     function renderMapActiveState() { if (state.quizPhase !== 'active') return; document.querySelectorAll('.map-btn').forEach(b => b.classList.remove('active')); const b = document.getElementById(`map-btn-${state.currentQuizIndex}`); if (b) b.classList.add('active'); }
     
     init();
-    // ======================================================
-// SCRIPT SỬA LỖI CỤ THỂ (ID 215 & 243)
-// Dán đoạn này vào sau biến quizData
-// ======================================================
-(function fixSpecificQuestions() {
-    // 1. Sửa câu 215 (Bị mất điều kiện i<x trong vòng for)
-    const q215 = quizData.find(q => q.id === 215);
-    if (q215) {
-        q215.topic = "Control Flow (Loops/If)";
-        q215.en = {
-            "question": "What is the output when the sample code below is executed?",
-            "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-            "options": ["9", "8", "12", "10"],
-            "answer": "A",
-            "explanation": "Loop starts at i=9. Condition 9<10 is true. Print 9. i becomes 10. Break loop."
-        };
-        q215.vi = {
-            "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
-            "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-            "options": ["9", "8", "12", "10"],
-            "answer": "A",
-            "explanation": "Vòng lặp chạy với i=9. Điều kiện 9<10 đúng. In ra 9. i tăng lên 10. Gặp break thoát vòng lặp."
-        };
-    }
 
-    // 2. Sửa câu 243 (Câu hỏi ma trận 3x3 - Tính tổng đường chéo chính)
-    const q243 = quizData.find(q => q.id === 243);
-    if (q243) {
-        q243.topic = "Arrays & Strings";
-        q243.en = {
-            "question": "Consider a 3x3 matrix `mat`. The code snippet is executed to calculate a value named `sum`. Which option correctly describes the value of `sum`?",
-            "code": "int sum = 0;\nfor (int i = 0; i < 3; i++)\n    sum += mat[i][i];",
-            "options": [
-                "The sum of diagonal elements in the matrix",
-                "The sum of all elements in the matrix",
-                "The sum of non-diagonal elements",
-                "The sum of elements below the main diagonal"
-            ],
-            "answer": "A",
-            "explanation": "mat[i][i] refers to elements where row index equals column index (0,0), (1,1), (2,2). This represents the main diagonal."
-        };
-        q243.vi = {
-            "question": "Xem xét một ma trận 3x3 `mat`. Đoạn mã dưới đây tính giá trị `sum`. Lựa chọn nào mô tả đúng giá trị của tổng này?",
-            "code": "int sum = 0;\nfor (int i = 0; i < 3; i++)\n    sum += mat[i][i];",
-            "options": [
-                "Tổng các phần tử trên đường chéo chính",
-                "Tổng tất cả các phần tử trong ma trận",
-                "Tổng các phần tử không nằm trên đường chéo",
-                "Tổng các phần tử dưới đường chéo chính"
-            ],
-            "answer": "A",
-            "explanation": "mat[i][i] truy cập các phần tử có chỉ số hàng bằng chỉ số cột (0,0), (1,1), (2,2). Đây là các phần tử nằm trên đường chéo chính."
-        };
-    }
-
-    console.log("Đã sửa xong câu 215 và 243!");
-})();
 </script>
 </body>
 </html>
