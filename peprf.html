@@ -2989,21 +2989,21 @@
         }
     },
     {
-        "id": 164,
-        "en": {
-            "question": "What will be printed when the code below is executed?",
-            "code": "int i = 4;\nswitch (i) {\n    default:\n    case 3:\n        i += 5;\n        if (i == 8) {\n            i++;\n            if (i == 9) break;\n            i *= 2;\n        }\n        i -= 4;\n        break;\n    case 8:\n        i += 5;\n        break;\n}\nprintf(\"i = %d\\n\", i);",
-            "options": ["A. 9", "B. 18", "C. 8", "D. 5"],
-            "answer": "D. 5",
-            "explanation": "`i=4`, no `case 4`, so it enters `default`. There's no break, so it 'falls through' to `case 3`. Inside `case 3`: `i = 4 + 5 = 9`. The `if (i == 8)` condition is false. Then, `i -= 4` executes, making `i = 9 - 4 = 5`. The `break` then exits the switch. `printf` prints 5."
-        },
-        "vi": {
-            "question": "Điều gì sẽ được in ra khi đoạn mã sau được thực thi?",
-            "code": "int i = 4;\nswitch (i) {\n    default:\n    case 3:\n        i += 5;\n        if (i == 8) {\n            i++;\n            if (i == 9) break;\n            i *= 2;\n        }\n        i -= 4;\n        break;\n    case 8:\n        i += 5;\n        break;\n}\nprintf(\"i = %d\\n\", i);",
-            "options": ["A. 9", "B. 18", "C. 8", "D. 5"],
-            "answer": "D. 5",
-            "explanation": "`i=4`, không có `case 4` nên chương trình nhảy vào `default`. Vì không có `break` ở `default`, nó sẽ 'rơi' xuống `case 3`. Tại `case 3`: `i = 4 + 5 = 9`. Điều kiện `if (i == 8)` là sai. Sau đó, `i -= 4` được thực thi, `i = 9 - 4 = 5`. Lệnh `break` thoát khỏi switch. Lệnh `printf` in ra 5."
-        }
+            "id": 164,
+            "en": {
+                "question": "What will be printed when the code below is executed?",
+                "code": "int i = 4;\nswitch (i) {\n    default:\n    case 3:\n        i += 5;\n        if (i == 8) {\n            i++;\n            if (i == 9) break;\n            i *= 2;\n        }\n        i -= 4;\n        break;\n    case 8:\n        i += 5;\n        break;\n}\nprintf(\"i = %d\\n\", i);",
+                "options": ["A. 9", "B. 18", "C. 8", "D. 5"],
+                "answer": "D. 5",
+                "explanation": "`i=4`, no `case 4`, so it enters `default`. There's no break, so it 'falls through' to `case 3`. Inside `case 3`: `i = 4 + 5 = 9`. The `if (i == 8)` condition is false. Then, `i -= 4` executes, making `i = 9 - 4 = 5`. The `break` then exits the switch. `printf` prints 5."
+            },
+            "vi": {
+                "question": "Điều gì sẽ được in ra khi đoạn mã sau được thực thi?",
+                "code": "int i = 4;\nswitch (i) {\n    default:\n    case 3:\n        i += 5;\n        if (i == 8) {\n            i++;\n            if (i == 9) break;\n            i *= 2;\n        }\n        i -= 4;\n        break;\n    case 8:\n        i += 5;\n        break;\n}\nprintf(\"i = %d\\n\", i);",
+                "options": ["A. 9", "B. 18", "C. 8", "D. 5"],
+                "answer": "D. 5",
+                "explanation": "`i=4`, không có `case 4` nên chương trình nhảy vào `default`. Vì không có `break` ở `default`, nó sẽ 'rơi' xuống `case 3`. Tại `case 3`: `i = 4 + 5 = 9`. Điều kiện `if (i == 8)` là sai. Sau đó, `i -= 4` được thực thi, `i = 9 - 4 = 5`. Lệnh `break` thoát khỏi switch. Lệnh `printf` in ra 5."
+            }
     },
     {
         "id": 165,
@@ -3540,21 +3540,21 @@
         }
     },
     {
-        "id": 199,
-        "en": {
-            "question": "What is the output when the sample code below is executed?",
-            "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-            "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
-            "answer": "A. 9",
-            "explanation": "The loop starts with `i=9`. The condition `9 < 10` is true. `printf(\"%d\", i++)` prints the current value of `i` (9) and then increments `i` to 10. The `break;` statement is then executed, immediately terminating the loop. The second `printf` is never reached."
-        },
-        "vi": {
-            "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
-            "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-            "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
-            "answer": "A. 9",
-            "explanation": "Vòng lặp bắt đầu với `i=9`. Điều kiện `9 < 10` là đúng. `printf(\"%d\", i++)` in ra giá trị hiện tại của `i` (là 9), sau đó tăng `i` lên 10. Lệnh `break;` ngay sau đó được thực thi, kết thúc vòng lặp ngay lập tức. Lệnh `printf` thứ hai không bao giờ được thực thi."
-        }
+            "id": 199,
+            "en": {
+                "question": "What is the output when the sample code below is executed?",
+                "code": "int main(){\n    int x=10, i;\n    for(i=9; i < x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+                "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
+                "answer": "A. 9",
+                "explanation": "The loop starts with `i=9`. The condition `9 < 10` is true. `printf(\"%d\", i++)` prints the current value of `i` (9) and then increments `i` to 10. The `break;` statement is then executed, immediately terminating the loop. The second `printf` is never reached."
+            },
+            "vi": {
+                "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
+                "code": "int main(){\n    int x=10, i;\n    for(i=9; i < x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+                "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
+                "answer": "A. 9",
+                "explanation": "Vòng lặp bắt đầu với `i=9`. Điều kiện `9 < 10` là đúng. `printf(\"%d\", i++)` in ra giá trị hiện tại của `i` (là 9), sau đó tăng `i` lên 10. Lệnh `break;` ngay sau đó được thực thi, kết thúc vòng lặp ngay lập tức. Lệnh `printf` thứ hai không bao giờ được thực thi."
+            }
     },
     {
         "id": 200,
@@ -4182,22 +4182,22 @@
             "explanation": "Một `signed char` thường có phạm vi từ -128 đến 127. `125 + 5 = 130`. Điều này gây ra tràn số (overflow). Biểu diễn nhị phân của 130 là `10000010`. Bit đầu tiên là 1, vì vậy nó là một số âm. Giá trị bù 2 của nó là -126."
         }
     },
-    {
-        "id": 238,
-        "en": {
-            "question": "What will be the output of the C program?",
-            "code": "int main(){\n    char temp;\n    char arr[10] = {1,2,3,4,5,6,7,8};\n    temp = (arr + 1)[2];\n    printf(\"%d\\n\", temp);\n    return 0;\n}",
-            "options": ["A. 1", "B. 2", "C. 3", "D. 4"],
-            "answer": "D. 4",
-            "explanation": "`arr + 1` is a pointer to the second element of the array (`arr[1]`). `(arr + 1)[2]` is equivalent to `*((arr+1) + 2)` or `*(arr+3)`, which is `arr[3]`. The value of `arr[3]` is 4."
-        },
-        "vi": {
-            "question": "Đầu ra của chương trình C sẽ là gì?",
-            "code": "int main(){\n    char temp;\n    char arr[10] = {1,2,3,4,5,6,7,8};\n    temp = (arr + 1)[2];\n    printf(\"%d\\n\", temp);\n    return 0;\n}",
-            "options": ["A. 1", "B. 2", "C. 3", "D. 4"],
-            "answer": "D. 4",
-            "explanation": "`arr + 1` là một con trỏ trỏ đến phần tử thứ hai của mảng (`arr[1]`). `(arr + 1)[2]` tương đương với `*((arr+1) + 2)` hoặc `*(arr+3)`, chính là `arr[3]`. Giá trị của `arr[3]` là 4."
-        }
+{
+            "id": 238,
+            "en": {
+                "question": "What will be the output of the C program?",
+                "code": "int main(){\n    char temp;\n    char arr[10] = {1,2,3,4,5,6,7,8};\n    temp = (arr + 1)[2];\n    printf(\"%d\\n\", temp);\n    return 0;\n}",
+                "options": ["A. 1", "B. 2", "C. 3", "D. 4"],
+                "answer": "D. 4",
+                "explanation": "`arr + 1` points to `arr[1]`. `(arr + 1)[2]` is equivalent to `arr[1 + 2]`, which is `arr[3]`. The value at index 3 is 4."
+            },
+            "vi": {
+                "question": "Đầu ra của chương trình C sẽ là gì?",
+                "code": "int main(){\n    char temp;\n    char arr[10] = {1,2,3,4,5,6,7,8};\n    temp = (arr + 1)[2];\n    printf(\"%d\\n\", temp);\n    return 0;\n}",
+                "options": ["A. 1", "B. 2", "C. 3", "D. 4"],
+                "answer": "D. 4",
+                "explanation": "`arr + 1` trỏ đến `arr[1]`. `(arr + 1)[2]` tương đương với `arr[1 + 2]`, tức là `arr[3]`. Giá trị tại chỉ số 3 là 4."
+            }
     },
     {
         "id": 239,
@@ -4389,21 +4389,21 @@
         }
     },
     {
-        "id": 251,
-        "en": {
-            "question": "Consider the following program and answer the following questions. What is the result displayed to the screen if the user inputs 85?",
-            "code": "void hours_and_minutes(int total, int& phrs, int& pmin) {\n    pmin = total % 60;\n    phrs = total / 60;\n}\nint main() {\n    int tmin, hr = 0, min = 0;\n    printf(\"Enter total minutes for videotape: \");\n    scanf(\"%d\", &tmin);\n    hours_and_minutes(tmin, hr, min);\n    printf(\"That is %d hours and %d minutes\\n\", hr, min);\n}",
-            "options": ["A. That is 8 hours and 5 minutes", "B. That is 0 hours and 0 minutes", "C. That is 1 hours and 25 minutes", "D. That is 0 hours and 85 minutes"],
-            "answer": "C. That is 1 hours and 25 minutes",
-            "explanation": "The code has a syntax error (`int&` is C++, not C). Assuming it's C with pointers: `pmin = 85 % 60 = 25`. `phrs = 85 / 60 = 1`. The output will be 1 hour and 25 minutes."
-        },
-        "vi": {
-            "question": "Xem xét chương trình sau và trả lời các câu hỏi sau. Kết quả hiển thị trên màn hình nếu người dùng nhập 85 là gì?",
-            "code": "void hours_and_minutes(int total, int& phrs, int& pmin) {\n    pmin = total % 60;\n    phrs = total / 60;\n}\nint main() {\n    int tmin, hr = 0, min = 0;\n    printf(\"Nhập tổng số phút cho băng video: \");\n    scanf(\"%d\", &tmin);\n    hours_and_minutes(tmin, hr, min);\n    printf(\"Đó là %d giờ và %d phút\\n\", hr, min);\n}",
-            "options": ["A. Đó là 8 giờ và 5 phút", "B. Đó là 0 giờ và 0 phút", "C. Đó là 1 giờ và 25 phút", "D. Đó là 0 giờ và 85 phút"],
-            "answer": "C. Đó là 1 giờ và 25 phút",
-            "explanation": "Mã này có lỗi cú pháp (`int&` là C++, không phải C). Giả sử nó là C và dùng con trỏ: `pmin = 85 % 60 = 25`. `phrs = 85 / 60 = 1` (chia số nguyên). Đầu ra sẽ là 1 giờ và 25 phút."
-        }
+            "id": 251,
+            "en": {
+                "question": "Consider the following C program using pointers. What is the result displayed if the user inputs 85?",
+                "code": "void hours_and_minutes(int total, int *phrs, int *pmin) {\n    *pmin = total % 60;\n    *phrs = total / 60;\n}\nint main() {\n    int tmin, hr = 0, min = 0;\n    printf(\"Enter total minutes: \");\n    scanf(\"%d\", &tmin);\n    hours_and_minutes(tmin, &hr, &min);\n    printf(\"That is %d hours and %d minutes\\n\", hr, min);\n    return 0;\n}",
+                "options": ["A. That is 8 hours and 5 minutes", "B. That is 0 hours and 0 minutes", "C. That is 1 hours and 25 minutes", "D. That is 0 hours and 85 minutes"],
+                "answer": "C. That is 1 hours and 25 minutes",
+                "explanation": "`tmin` is 85. `*pmin = 85 % 60 = 25`. `*phrs = 85 / 60 = 1` (integer division). The output is: That is 1 hours and 25 minutes."
+            },
+            "vi": {
+                "question": "Xem xét chương trình C sau sử dụng con trỏ. Kết quả hiển thị là gì nếu người dùng nhập 85?",
+                "code": "void hours_and_minutes(int total, int *phrs, int *pmin) {\n    *pmin = total % 60;\n    *phrs = total / 60;\n}\nint main() {\n    int tmin, hr = 0, min = 0;\n    printf(\"Enter total minutes: \");\n    scanf(\"%d\", &tmin);\n    hours_and_minutes(tmin, &hr, &min);\n    printf(\"That is %d hours and %d minutes\\n\", hr, min);\n    return 0;\n}",
+                "options": ["A. That is 8 hours and 5 minutes", "B. That is 0 hours and 0 minutes", "C. That is 1 hours and 25 minutes", "D. That is 0 hours and 85 minutes"],
+                "answer": "C. That is 1 hours and 25 minutes",
+                "explanation": "`tmin` là 85. `*pmin = 85 % 60 = 25`. `*phrs = 85 / 60 = 1`. Kết quả là: That is 1 hours and 25 minutes."
+            }
     },
     {
         "id": 252,
