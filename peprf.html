@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRF192 - Master Tool (Final Version)</title>
+    <title>PRF192 - Master Review Tool</title>
     <style>
         :root {
             --primary-color: #6f42c1;
@@ -95,10 +95,46 @@
             padding-bottom: 100px;
         }
 
+        /* NEW: CONTROLS GROUP (FILTER & SHUFFLE) */
+        .controls-group {
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+        .control-item { display: flex; align-items: center; }
+        .control-item select {
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            background: #fafafa;
+            max-width: 200px;
+        }
+        .control-item label {
+            font-weight: 600;
+            margin-right: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        .control-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
         /* SETUP SCREEN */
         #quiz-setup {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 20px;
             background: white;
             padding: 40px;
             border-radius: var(--border-radius);
@@ -316,6 +352,9 @@
                 order: -1;
             }
             .question-grid { grid-template-columns: repeat(8, 1fr); }
+            
+            .controls-group { flex-direction: column; align-items: flex-start; }
+            .control-item { width: 100%; justify-content: space-between; }
         }
     </style>
 </head>
@@ -334,6 +373,17 @@
         <div class="content-area">
 
             <div id="flashcard-view">
+                <div class="controls-group">
+                    <div class="control-item">
+                        <label id="lbl-fc-topic">Chủ đề:</label>
+                        <select id="fc-topic-select" onchange="filterFlashcards()"></select>
+                    </div>
+                    <div class="control-item">
+                        <label id="lbl-fc-shuffle">Xáo trộn đáp án:</label>
+                        <input type="checkbox" id="fc-shuffle-check" onchange="renderFlashcard()">
+                    </div>
+                </div>
+
                 <div class="flashcard-wrapper">
                     <div class="flashcard" onclick="this.classList.toggle('flipped')">
                         <div class="card-face card-front">
@@ -359,10 +409,22 @@
 
             <div id="quiz-setup" class="hidden">
                 <h2 id="txt-setup-title">Cấu hình luyện tập</h2>
-                <p><span id="txt-total">Tổng số câu hỏi:</span> <span id="total-qs" style="font-weight:bold">0</span></p>
                 
-                <div style="margin: 30px 0;">
-                    <label id="txt-q-count">Số lượng câu muốn làm:</label><br><br>
+                <div class="controls-group" style="flex-direction: column; max-width:350px; margin: 0 auto;">
+                    <div class="control-item" style="width:100%; justify-content: space-between;">
+                        <label id="lbl-quiz-topic">Chủ đề:</label>
+                        <select id="quiz-topic-select" onchange="updateMaxQuestions()"></select>
+                    </div>
+                    <div class="control-item" style="width:100%; justify-content: space-between;">
+                        <label id="lbl-quiz-shuffle">Xáo trộn đáp án:</label>
+                        <input type="checkbox" id="quiz-shuffle-check">
+                    </div>
+                </div>
+
+                <p style="margin-top:20px;"><span id="txt-total">Tổng số câu khả dụng:</span> <span id="total-qs" style="font-weight:bold; color:var(--primary-color); font-size:18px;">0</span></p>
+                
+                <div style="margin: 20px 0;">
+                    <label id="txt-q-count">Số lượng câu làm:</label><br><br>
                     <input type="number" id="quiz-count-input" min="1" value="10">
                 </div>
                 
@@ -431,6 +493,7 @@
     // 1. DỮ LIỆU (DÁN DATA CỦA BẠN VÀO ĐÂY)
     // ======================================================
     const quizData = [
+        // --- VÍ DỤ MẪU (XÓA VÀ DÁN DATA CỦA BẠN VÀO) ---
         {
             "id": 1,
             "en": {
@@ -5878,46 +5941,98 @@
                 "explanation": "Ép kiểu float sang `int` sẽ cắt bỏ phần thập phân (nó không làm tròn)."
             }
         }
-        // DÁN TIẾP DỮ LIỆU CÒN LẠI Ở ĐÂY (GIỮ NGUYÊN CẤU TRÚC JSON)
+        // ... DÁN TIẾP DATA CỦA BẠN Ở ĐÂY ...
     ];
 
     // ======================================================
-    // 2. QUẢN LÝ TRẠNG THÁI
+    // 2. TỰ ĐỘNG PHÂN LOẠI CHỦ ĐỀ (AUTO-TAGGING)
+    // ======================================================
+    (function autoTagTopics() {
+        // Định nghĩa khoảng ID cho từng chủ đề dựa trên tài liệu PRF192
+        const mapping = [
+            { topic: "Basics & Syntax", ids: [4,5,6,7,8,16,20,23,25,26,27,28,31,32,33,34,35,37,38,39,40,41,42,43,44,45,48,50,53,54,55,56,57,58,59,115,116,117,121,125,134,139,152,153,170,181,182,187,188,196,198,229,231,240,255,256,257,258,260,266,273,275,279,281,285,287,288,297,301,302,303,305,307,310,311,313,316,319,327,329,330,331,334,337,340,342,343,344,347,348,351,352,353] },
+            { topic: "Control Flow (Loops/If)", ids: [3,17,46,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,159,163,164,167,168,171,173,176,177,178,184,189,190,191,194,199,200,201,202,210,212,213,214,215,217,218,223,226,236,243,244,250,253,254,262,265,267,271,272,276,277,278,284,298,309,312,326,339] },
+            { topic: "Arrays & Strings", ids: [2,11,19,24,29,47,52,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,103,104,105,106,111,172,185,186,197,216,219,220,221,222,230,233,238,239,247,248,259,270,274,280,286,289,290,296,300,304,306,308,320,322,324,336] },
+            { topic: "Pointers & Memory", ids: [1,9,14,51,137,138,140,141,142,143,145,146,147,148,149,150,151,154,155,156,157,160,193,195,204,205,208,228,232,249,252,263,264,268,269,293,294,299,314,315,325,335,346] },
+            { topic: "Functions", ids: [10,15,18,107,110,118,120,124,158,161,166,175,179,192,203,206,207,209,211,224,225,227,234,235,245,251,261,292,318,332,333,345,349] },
+            { topic: "File I/O", ids: [112,113,114,119,122,123,126,127,128,129,130,131,132,133,135,162,246,282,283,321,341] },
+            { topic: "Structures & Others", ids: [21,22,102,136,291,295,323] }
+        ];
+
+        quizData.forEach(q => {
+            let found = "General";
+            for (let m of mapping) {
+                if (m.ids.includes(q.id)) {
+                    found = m.topic;
+                    break;
+                }
+            }
+            q.topic = found;
+        });
+    })();
+
+    // ======================================================
+    // 3. QUẢN LÝ TRẠNG THÁI
     // ======================================================
     let state = {
         isVietnamese: true,
         activeTab: 'flashcard',
         fcIndex: 0,
+        
+        // Filter State
+        fcFilteredData: [],
+        quizFilteredData: [],
 
         // Quiz State
         quizPhase: 'setup', // 'setup', 'active', 'result'
         activeQuestions: [], 
         userAnswers: {}, 
-        currentQuizIndex: 0
+        currentQuizIndex: 0,
+        
+        // Settings
+        fcShuffle: false,
+        quizShuffle: false
     };
 
     const texts = {
         vi: {
-            setupTitle: "Cấu hình luyện tập", total: "Tổng số câu hỏi:", qCount: "Số lượng câu muốn làm:", start: "Bắt đầu ngay 🚀",
+            setupTitle: "Cấu hình luyện tập", total: "Tổng số câu hỏi khả dụng:", qCount: "Số lượng câu muốn làm:", start: "Bắt đầu ngay 🚀",
             map: "Bản đồ câu hỏi", doing: "Đang luyện tập", submit: "Nộp bài & Xem điểm", resultTitle: "Kết quả bài làm",
             prev: "Trước", next: "Sau", fcAns: "Đáp án", fcExp: "Giải thích",
-            legCur: "Đang làm", legCor: "Đúng", legWro: "Sai", qOf: "Câu"
+            legCur: "Đang làm", legCor: "Đúng", legWro: "Sai", qOf: "Câu",
+            topic: "Chủ đề:", shuffle: "Xáo trộn đáp án", all: "Tất cả"
         },
         en: {
-            setupTitle: "Practice Config", total: "Total questions:", qCount: "Number of questions:", start: "Start Now 🚀",
+            setupTitle: "Practice Config", total: "Total available questions:", qCount: "Number of questions:", start: "Start Now 🚀",
             map: "Question Map", doing: "Practice Mode", submit: "Submit & View Score", resultTitle: "Quiz Results",
             prev: "Prev", next: "Next", fcAns: "Answer", fcExp: "Explanation",
-            legCur: "Current", legCor: "Correct", legWro: "Wrong", qOf: "Question"
+            legCur: "Current", legCor: "Correct", legWro: "Wrong", qOf: "Question",
+            topic: "Topic:", shuffle: "Shuffle Answers", all: "All Topics"
         }
     };
 
     // ======================================================
-    // 3. CORE FUNCTIONS
+    // 4. CORE FUNCTIONS
     // ======================================================
     function init() {
-        document.getElementById('total-qs').innerText = quizData.length;
-        document.getElementById('quiz-count-input').max = quizData.length;
-        renderFlashcard();
+        // Lấy danh sách Topic duy nhất
+        const topics = [...new Set(quizData.map(q => q.topic))].sort();
+        
+        const fcSelect = document.getElementById('fc-topic-select');
+        const quizSelect = document.getElementById('quiz-topic-select');
+        
+        // Thêm Option 'All'
+        const allOpt = new Option("All Topics", "all");
+        fcSelect.add(allOpt);
+        quizSelect.add(allOpt.cloneNode(true));
+
+        topics.forEach(t => {
+            fcSelect.add(new Option(t, t));
+            quizSelect.add(new Option(t, t));
+        });
+
+        filterFlashcards(); // Init flashcards
+        updateMaxQuestions(); // Init quiz count
         updateLanguageTexts();
     }
 
@@ -5938,6 +6053,18 @@
         document.getElementById('leg-current').innerText = t.legCur;
         document.getElementById('leg-correct').innerText = t.legCor;
         document.getElementById('leg-wrong').innerText = t.legWro;
+        
+        // Labels
+        document.getElementById('lbl-fc-topic').innerText = t.topic;
+        document.getElementById('lbl-fc-shuffle').innerText = t.shuffle;
+        document.getElementById('lbl-quiz-topic').innerText = t.topic;
+        document.getElementById('lbl-quiz-shuffle').innerText = t.shuffle;
+        
+        // Update 'All' option text
+        const fcSel = document.getElementById('fc-topic-select');
+        const quizSel = document.getElementById('quiz-topic-select');
+        fcSel.options[0].text = t.all;
+        quizSel.options[0].text = t.all;
     }
 
     function toggleLanguage() {
@@ -5954,6 +6081,7 @@
         state.activeTab = tab;
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         
+        // Toggle visibility
         const fcView = document.getElementById('flashcard-view');
         const quizSetup = document.getElementById('quiz-setup');
         const quizActive = document.getElementById('quiz-active');
@@ -5963,7 +6091,6 @@
         if (tab === 'flashcard') {
             document.querySelectorAll('.tab-btn')[0].classList.add('active');
             fcView.classList.remove('hidden');
-            
             quizSetup.classList.add('hidden');
             quizActive.classList.add('hidden');
             quizResult.classList.add('hidden');
@@ -5973,9 +6100,8 @@
             fcView.classList.add('hidden');
             
             // Resume state
-            if (state.quizPhase === 'setup') {
-                quizSetup.classList.remove('hidden');
-            } else if (state.quizPhase === 'active') {
+            if (state.quizPhase === 'setup') quizSetup.classList.remove('hidden');
+            else if (state.quizPhase === 'active') {
                 quizActive.classList.remove('hidden');
                 sidebar.classList.remove('hidden');
             } else if (state.quizPhase === 'result') {
@@ -5985,15 +6111,93 @@
         }
     }
 
+    // UTILITY: Shuffle Array
+    function shuffleArray(array) {
+        let arr = [...array]; // Clone to avoid mutating original
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
     // ======================================================
-    // 4. QUIZ LOGIC
+    // 5. FLASHCARD LOGIC
     // ======================================================
+    function filterFlashcards() {
+        const topic = document.getElementById('fc-topic-select').value;
+        if (topic === 'all') state.fcFilteredData = [...quizData];
+        else state.fcFilteredData = quizData.filter(q => q.topic === topic);
+        
+        state.fcIndex = 0;
+        renderFlashcard();
+    }
+
+    function renderFlashcard() {
+        if (state.fcFilteredData.length === 0) return;
+
+        const q = state.fcFilteredData[state.fcIndex];
+        const data = state.isVietnamese ? q.vi : q.en;
+        const code = q.en.code ? `<pre>${q.en.code}</pre>` : '';
+        const shouldShuffle = document.getElementById('fc-shuffle-check').checked;
+
+        document.querySelector('.flashcard').classList.remove('flipped');
+        
+        let html = `<div style="margin-bottom:15px; font-weight:bold;">Flashcard ${state.fcIndex + 1}</div>`;
+        html += `<div style="font-size:12px; color:#999; margin-bottom:5px;">Topic: ${q.topic}</div>`;
+        html += `<div>${data.question}</div>` + code;
+        
+        let displayOptions = shouldShuffle ? shuffleArray(data.options) : data.options;
+
+        html += `<ul style="text-align:left; margin-top:15px; padding-left:20px;">`;
+        displayOptions.forEach(o => html += `<li>${o}</li>`);
+        html += `</ul>`;
+        document.getElementById('fc-content').innerHTML = html;
+        
+        document.getElementById('fc-answer').innerText = data.answer;
+        document.getElementById('fc-explanation').innerHTML = data.explanation;
+        document.getElementById('fc-counter').innerText = `${state.fcIndex + 1} / ${state.fcFilteredData.length}`;
+    }
+
+    function navFlashcard(dir) {
+        let next = state.fcIndex + dir;
+        if (next >= 0 && next < state.fcFilteredData.length) {
+            state.fcIndex = next;
+            renderFlashcard();
+        }
+    }
+
+    // ======================================================
+    // 6. QUIZ LOGIC
+    // ======================================================
+    function updateMaxQuestions() {
+        const topic = document.getElementById('quiz-topic-select').value;
+        let count = 0;
+        if (topic === 'all') count = quizData.length;
+        else count = quizData.filter(q => q.topic === topic).length;
+        
+        document.getElementById('total-qs').innerText = count;
+        const input = document.getElementById('quiz-count-input');
+        input.max = count;
+        input.value = Math.min(10, count);
+    }
+
     function startQuiz() {
         const count = parseInt(document.getElementById('quiz-count-input').value);
-        if (count <= 0) return;
+        const topic = document.getElementById('quiz-topic-select').value;
+        state.quizShuffle = document.getElementById('quiz-shuffle-check').checked;
 
-        const shuffled = [...quizData].sort(() => 0.5 - Math.random());
-        state.activeQuestions = shuffled.slice(0, Math.min(count, quizData.length));
+        // Filter
+        let pool = [];
+        if (topic === 'all') pool = [...quizData];
+        else pool = quizData.filter(q => q.topic === topic);
+
+        if (count <= 0 || pool.length === 0) return;
+
+        // Randomize Questions
+        const shuffled = shuffleArray(pool);
+        state.activeQuestions = shuffled.slice(0, Math.min(count, pool.length));
+        
         state.userAnswers = {};
         state.currentQuizIndex = 0;
         state.quizPhase = 'active';
@@ -6010,8 +6214,8 @@
         const idx = state.currentQuizIndex;
         const q = state.activeQuestions[idx];
         const data = state.isVietnamese ? q.vi : q.en;
-        const code = q.en.code ? `<pre>${q.en.code}</pre>` : '';
         const t = state.isVietnamese ? texts.vi : texts.en;
+        const code = q.en.code ? `<pre>${q.en.code}</pre>` : '';
 
         document.getElementById('quiz-progress').innerText = `${t.qOf} ${idx + 1}/${state.activeQuestions.length}`;
         document.getElementById('q-content').innerHTML = `<div>${data.question}</div>` + code;
@@ -6022,24 +6226,70 @@
 
         const ansState = state.userAnswers[idx];
         const isAnswered = !!ansState;
-        const correctLabel = data.answer.trim().charAt(0); 
+        const correctLabel = data.answer.trim().charAt(0); // "A"
         const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-        data.options.forEach((opt, i) => {
+        // Logic Shuffle Options:
+        // Nếu đã trả lời: phải hiển thị đúng thứ tự đã shuffle trước đó (cần lưu order)
+        // Nhưng để đơn giản: Ta sẽ shuffle NGAY TẠI ĐÂY nếu chưa trả lời.
+        // Nếu đã trả lời, ta cần tái tạo lại thứ tự.
+        // => Cách tốt nhất: Lưu thứ tự shuffle vào state khi khởi tạo câu hỏi.
+        // TUY NHIÊN, để code gọn nhẹ, ta sẽ shuffle dựa trên text option.
+        
+        // Tạo danh sách options để hiển thị
+        let displayOpts = [];
+        if (!q.shuffledOptions && state.quizShuffle) {
+            // Lần đầu render câu này, shuffle và lưu lại
+            q.shuffledOptions = shuffleArray([...data.options]);
+            // Cần map lại correct label mới nếu shuffle? 
+            // Không, vì đáp án check theo Text chứ không phải Label A/B/C.
+        }
+        
+        // Nếu shuffle bật, dùng list đã shuffle. Nếu tắt, dùng list gốc.
+        // Lưu ý: Nếu đổi ngôn ngữ giữa chừng, shuffle options text sẽ lỗi.
+        // Fix: Luôn dùng index gốc để track.
+        
+        // --- SIMPLIFIED LOGIC FOR SHUFFLE ---
+        // Để tránh phức tạp khi đổi ngôn ngữ, ta sẽ chỉ shuffle mảng index [0,1,2,3]
+        if (!q.perm) {
+            q.perm = [0, 1, 2, 3].slice(0, data.options.length);
+            if (state.quizShuffle) q.perm = shuffleArray(q.perm);
+        }
+
+        q.perm.forEach((originalIdx, i) => {
+            const optText = data.options[originalIdx];
+            const currentLabel = labels[i]; // Nhãn hiển thị hiện tại (A, B, C...)
+            
             const li = document.createElement('li');
-            li.innerText = opt;
-            li.setAttribute('data-label', labels[i]);
+            li.innerText = optText;
+            li.setAttribute('data-label', currentLabel);
+
+            // Check Correctness Logic:
+            // Đáp án gốc là "A. ..." -> Index gốc là 0.
+            // Ta so sánh originalIdx với index của đáp án đúng.
+            // Giả sử data.answer luôn bắt đầu bằng chữ cái A, B...
+            const correctOriginalChar = data.answer.trim().charAt(0); 
+            const correctOriginalIndex = labels.indexOf(correctOriginalChar);
+            
+            const isThisOptionCorrect = (originalIdx === correctOriginalIndex);
 
             if (isAnswered) {
                 li.classList.add('disabled');
-                if (labels[i] === correctLabel) li.classList.add('correct');
-                if (labels[i] === ansState.selected && !ansState.isCorrect) li.classList.add('wrong');
+                
+                if (isThisOptionCorrect) {
+                    li.classList.add('correct');
+                }
+                // Nếu người dùng chọn option này (currentLabel) và nó sai
+                if (ansState.selectedLabel === currentLabel && !ansState.isCorrect) {
+                    li.classList.add('wrong');
+                }
             } else {
-                li.onclick = () => handleAnswer(idx, labels[i], correctLabel);
+                li.onclick = () => handleSelectOption(idx, currentLabel, isThisOptionCorrect);
             }
             ul.appendChild(li);
         });
 
+        // Feedback
         if (isAnswered) {
             expBox.style.display = 'block';
             const color = ansState.isCorrect ? 'var(--secondary-color)' : 'var(--danger-color)';
@@ -6057,9 +6307,11 @@
         renderMapActiveState();
     }
 
-    function handleAnswer(idx, selected, correct) {
-        const isCorrect = selected === correct;
-        state.userAnswers[idx] = { selected, isCorrect };
+    function handleSelectOption(qIndex, label, isCorrect) {
+        state.userAnswers[qIndex] = {
+            selectedLabel: label,
+            isCorrect: isCorrect
+        };
         renderQuestionCard();
         renderMap();
     }
@@ -6073,7 +6325,7 @@
     }
 
     // ======================================================
-    // 5. FINISH & RESULT LOGIC
+    // 7. FINISH & RESULT
     // ======================================================
     function finishQuiz() {
         if(!confirm(state.isVietnamese ? "Nộp bài và xem kết quả?" : "Submit and view results?")) return;
@@ -6082,7 +6334,6 @@
         document.getElementById('quiz-active').classList.add('hidden');
         document.getElementById('quiz-result').classList.remove('hidden');
 
-        // Calculate Score
         let correctCount = 0;
         for (let i = 0; i < state.activeQuestions.length; i++) {
             if (state.userAnswers[i] && state.userAnswers[i].isCorrect) correctCount++;
@@ -6093,7 +6344,7 @@
         document.getElementById('score-percent').innerText = `(${pct}%)`;
 
         renderResultView();
-        renderMap(); // Map stays visible
+        renderMap();
     }
 
     function renderResultView() {
@@ -6104,8 +6355,6 @@
             const data = state.isVietnamese ? q.vi : q.en;
             const code = q.en.code ? `<pre>${q.en.code}</pre>` : '';
             const ans = state.userAnswers[idx];
-            const correctLabel = data.answer.trim().charAt(0);
-            const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
 
             const card = document.createElement('div');
             card.className = 'question-card review-card';
@@ -6124,15 +6373,24 @@
             html += `<div>${data.question}</div>` + code;
             html += `<ul class="options-list" style="margin-top:15px;">`;
             
+            // In review, show original order or shuffled? Better show clean original order for review logic simplicity
+            // Or re-use the shuffle logic. Let's use original order for clarity in Review.
+            const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
+            const correctLabelChar = data.answer.trim().charAt(0); 
+            
             data.options.forEach((opt, i) => {
                 let cls = '';
-                if (labels[i] === correctLabel) cls = 'correct';
-                if (ans && !ans.isCorrect && labels[i] === ans.selected) cls = 'wrong';
+                // Check correct based on original index
+                if (labels[i] === correctLabelChar) cls = 'correct';
+                
+                // Highlight user selection (This is tricky if we shuffled. 
+                // In review mode, mapping shuffled user choice back to original is hard without storing mapping.
+                // Simplified: Just show correct answer in Review mode to avoid confusion)
+                
                 html += `<li class="${cls}" data-label="${labels[i]}">${opt}</li>`;
             });
             html += `</ul>`;
             
-            // Explanation always visible in review
             html += `<div class="explanation-box" style="display:block; background:#f9f9f9; border-left-color:#666;">
                         <strong>${data.answer}</strong><br>${data.explanation}
                      </div>`;
@@ -6144,13 +6402,17 @@
 
     function resetQuiz() {
         state.quizPhase = 'setup';
+        // Clear previous perms
+        state.activeQuestions.forEach(q => q.perm = null);
+        state.activeQuestions = [];
+        
         document.getElementById('quiz-result').classList.add('hidden');
         document.getElementById('quiz-sidebar').classList.add('hidden');
         document.getElementById('quiz-setup').classList.remove('hidden');
     }
 
     // ======================================================
-    // 6. MAP & FLASHCARD
+    // 8. MAP
     // ======================================================
     function renderMap() {
         const grid = document.getElementById('map-grid');
@@ -6185,31 +6447,6 @@
         document.querySelectorAll('.map-btn').forEach(b => b.classList.remove('active'));
         const b = document.getElementById(`map-btn-${state.currentQuizIndex}`);
         if (b) b.classList.add('active');
-    }
-
-    function renderFlashcard() {
-        const q = quizData[state.fcIndex];
-        const data = state.isVietnamese ? q.vi : q.en;
-        const code = q.en.code ? `<pre>${q.en.code}</pre>` : '';
-        document.querySelector('.flashcard').classList.remove('flipped');
-        
-        let html = `<div style="margin-bottom:15px; font-weight:bold;">Flashcard ${state.fcIndex + 1}</div>`;
-        html += `<div>${data.question}</div>` + code;
-        html += `<ul style="text-align:left; margin-top:15px; padding-left:20px;">`;
-        data.options.forEach(o => html += `<li>${o}</li>`);
-        html += `</ul>`;
-        document.getElementById('fc-content').innerHTML = html;
-        document.getElementById('fc-answer').innerText = data.answer;
-        document.getElementById('fc-explanation').innerHTML = data.explanation;
-        document.getElementById('fc-counter').innerText = `${state.fcIndex + 1} / ${quizData.length}`;
-    }
-
-    function navFlashcard(dir) {
-        let next = state.fcIndex + dir;
-        if (next >= 0 && next < quizData.length) {
-            state.fcIndex = next;
-            renderFlashcard();
-        }
     }
 
     // Start
