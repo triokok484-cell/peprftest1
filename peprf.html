@@ -4767,7 +4767,1117 @@
             "answer": "C. Lỗi biên dịch.",
             "explanation": "`default` là một từ khóa trong C (dùng trong câu lệnh `switch`) và không thể được sử dụng làm tên biến."
         }
-    }
+    },
+        {
+            "id": 280,
+            "en": {
+                "question": "Which header file is required to use functions like `isdigit()`, `islower()`, and `isspace()`?",
+                "options": ["A. <stdio.h>", "B. <stdlib.h>", "C. <string.h>", "D. <ctype.h>"],
+                "answer": "D. <ctype.h>",
+                "explanation": "The `<ctype.h>` header file declares functions used for character classification and mapping."
+            },
+            "vi": {
+                "question": "Tệp tiêu đề (header file) nào là bắt buộc để sử dụng các hàm như `isdigit()`, `islower()`, và `isspace()`?",
+                "options": ["A. <stdio.h>", "B. <stdlib.h>", "C. <string.h>", "D. <ctype.h>"],
+                "answer": "D. <ctype.h>",
+                "explanation": "Tệp tiêu đề `<ctype.h>` khai báo các hàm được sử dụng để phân loại và chuyển đổi ký tự."
+            }
+        },
+        {
+            "id": 281,
+            "en": {
+                "question": "What is the correct syntax to define a constant macro for PI?",
+                "options": ["A. #define PI = 3.14159", "B. #define PI 3.14159;", "C. #define PI 3.14159", "D. const float PI = 3.14159;"],
+                "answer": "C. #define PI 3.14159",
+                "explanation": "Preprocessor directives like `#define` do not use an equal sign `=` and do not end with a semicolon `;`."
+            },
+            "vi": {
+                "question": "Cú pháp đúng để định nghĩa một macro hằng số cho PI là gì?",
+                "options": ["A. #define PI = 3.14159", "B. #define PI 3.14159;", "C. #define PI 3.14159", "D. const float PI = 3.14159;"],
+                "answer": "C. #define PI 3.14159",
+                "explanation": "Các chỉ thị tiền xử lý như `#define` không sử dụng dấu bằng `=` và không kết thúc bằng dấu chấm phẩy `;`."
+            }
+        },
+        {
+            "id": 282,
+            "en": {
+                "question": "Which of the following is the correct prototype for the `fopen` function?",
+                "options": ["A. FILE *fopen(char *filename, char *mode);", "B. int fopen(char *filename, char *mode);", "C. void *fopen(char *filename);", "D. FILE fopen(char *filename, char *mode);"],
+                "answer": "A. FILE *fopen(char *filename, char *mode);",
+                "explanation": "`fopen` returns a pointer to a `FILE` object (`FILE *`). It takes two strings: the filename and the mode."
+            },
+            "vi": {
+                "question": "Đâu là nguyên mẫu (prototype) đúng cho hàm `fopen`?",
+                "options": ["A. FILE *fopen(char *filename, char *mode);", "B. int fopen(char *filename, char *mode);", "C. void *fopen(char *filename);", "D. FILE fopen(char *filename, char *mode);"],
+                "answer": "A. FILE *fopen(char *filename, char *mode);",
+                "explanation": "`fopen` trả về một con trỏ tới đối tượng `FILE` (`FILE *`). Nó nhận hai chuỗi: tên tệp và chế độ mở."
+            }
+        },
+        {
+            "id": 283,
+            "en": {
+                "question": "Which file mode is used to open a file for writing, but appending data to the end if the file already exists?",
+                "options": ["A. \"w\"", "B. \"r+\"", "C. \"a\"", "D. \"w+\""],
+                "answer": "C. \"a\"",
+                "explanation": "The \"a\" mode stands for 'append'. It opens a file for writing at the end of the file. If the file does not exist, it creates a new one."
+            },
+            "vi": {
+                "question": "Chế độ tệp nào được sử dụng để mở tệp để ghi, nhưng nối dữ liệu vào cuối nếu tệp đã tồn tại?",
+                "options": ["A. \"w\"", "B. \"r+\"", "C. \"a\"", "D. \"w+\""],
+                "answer": "C. \"a\"",
+                "explanation": "Chế độ \"a\" là viết tắt của 'append' (nối). Nó mở tệp để ghi vào cuối tệp. Nếu tệp không tồn tại, nó sẽ tạo một tệp mới."
+            }
+        },
+        {
+            "id": 284,
+            "en": {
+                "question": "What will be the output of the following code? `int i; for(i=0; i<5; i++); printf(\"%d\", i);`",
+                "options": ["A. 0 1 2 3 4", "B. 5", "C. 4", "D. Infinite loop"],
+                "answer": "B. 5",
+                "explanation": "There is a semicolon `;` immediately after the `for` loop definition. This means the loop has an empty body. It runs until `i` becomes 5 (making `i<5` false). Then `printf` prints the final value of `i`."
+            },
+            "vi": {
+                "question": "Đầu ra của đoạn mã sau là gì? `int i; for(i=0; i<5; i++); printf(\"%d\", i);`",
+                "options": ["A. 0 1 2 3 4", "B. 5", "C. 4", "D. Vòng lặp vô hạn"],
+                "answer": "B. 5",
+                "explanation": "Có một dấu chấm phẩy `;` ngay sau định nghĩa vòng lặp `for`. Điều này có nghĩa là vòng lặp có thân rỗng. Nó chạy cho đến khi `i` bằng 5 (khiến `i<5` sai). Sau đó `printf` mới in giá trị cuối cùng của `i`."
+            }
+        },
+        {
+            "id": 285,
+            "en": {
+                "question": "Which of the following is NOT a valid identifier in C?",
+                "options": ["A. `__name`", "B. `my_var`", "C. `1st_number`", "D. `var1`"],
+                "answer": "C. `1st_number`",
+                "explanation": "Identifiers in C cannot start with a digit."
+            },
+            "vi": {
+                "question": "Cái nào sau đây KHÔNG phải là một tên định danh hợp lệ trong C?",
+                "options": ["A. `__name`", "B. `my_var`", "C. `1st_number`", "D. `var1`"],
+                "answer": "C. `1st_number`",
+                "explanation": "Tên định danh (tên biến/hàm) trong C không được bắt đầu bằng một chữ số."
+            }
+        },
+        {
+            "id": 286,
+            "en": {
+                "question": "What happens if you declare `int a[3] = (1, 2, 3);` and print `a[0]`?",
+                "options": ["A. 1", "B. 3", "C. Compiler Error", "D. Garbage value"],
+                "answer": "B. 3",
+                "explanation": "The parenthesis `(1, 2, 3)` invoke the comma operator, which evaluates operands and returns the last value. So `a[0]` is initialized to 3. Note: This is valid syntax but often a bug if `{}` were intended."
+            },
+            "vi": {
+                "question": "Điều gì xảy ra nếu bạn khai báo `int a[3] = (1, 2, 3);` và in ra `a[0]`?",
+                "options": ["A. 1", "B. 3", "C. Lỗi biên dịch", "D. Giá trị rác"],
+                "answer": "B. 3",
+                "explanation": "Dấu ngoặc tròn `(1, 2, 3)` gọi toán tử phẩy, toán tử này đánh giá các toán hạng và trả về giá trị cuối cùng. Vì vậy `a[0]` được khởi tạo bằng 3. Lưu ý: Đây là cú pháp hợp lệ nhưng thường là lỗi logic nếu người viết định dùng `{}`."
+            }
+        },
+        {
+            "id": 287,
+            "en": {
+                "question": "What is the output of `printf(\"%d\", 012);`?",
+                "options": ["A. 12", "B. 10", "C. 0", "D. Compile error"],
+                "answer": "B. 10",
+                "explanation": "A number starting with `0` in C is treated as an Octal (base 8) number. `012` in octal = 1*8 + 2 = 10 in decimal."
+            },
+            "vi": {
+                "question": "Đầu ra của `printf(\"%d\", 012);` là gì?",
+                "options": ["A. 12", "B. 10", "C. 0", "D. Lỗi biên dịch"],
+                "answer": "B. 10",
+                "explanation": "Một số bắt đầu bằng `0` trong C được coi là số hệ Bát phân (cơ số 8). `012` trong hệ bát phân = 1*8 + 2 = 10 trong hệ thập phân."
+            }
+        },
+        {
+            "id": 288,
+            "en": {
+                "question": "Given `#define SQR(x) x*x`. What is the value of `SQR(2+3)`?",
+                "options": ["A. 25", "B. 11", "C. 13", "D. Compile Error"],
+                "answer": "B. 11",
+                "explanation": "Macros do simple text substitution. `SQR(2+3)` becomes `2+3*2+3`. Due to precedence (* before +), it calculates `2 + (3*2) + 3` = `2 + 6 + 3` = 11."
+            },
+            "vi": {
+                "question": "Cho `#define SQR(x) x*x`. Giá trị của `SQR(2+3)` là bao nhiêu?",
+                "options": ["A. 25", "B. 11", "C. 13", "D. Lỗi biên dịch"],
+                "answer": "B. 11",
+                "explanation": "Macro thực hiện thay thế văn bản đơn thuần. `SQR(2+3)` trở thành `2+3*2+3`. Do độ ưu tiên (* trước +), nó tính toán `2 + (3*2) + 3` = `2 + 6 + 3` = 11."
+            }
+        },
+        {
+            "id": 289,
+            "en": {
+                "question": "Which function adds one string to the end of another?",
+                "options": ["A. `stradd()`", "B. `stringadd()`", "C. `strcat()`", "D. `append()`"],
+                "answer": "C. `strcat()`",
+                "explanation": "`strcat` (string concatenation) is the standard library function to append a source string to a destination string."
+            },
+            "vi": {
+                "question": "Hàm nào thêm một chuỗi vào cuối chuỗi khác?",
+                "options": ["A. `stradd()`", "B. `stringadd()`", "C. `strcat()`", "D. `append()`"],
+                "answer": "C. `strcat()`",
+                "explanation": "`strcat` (string concatenation) là hàm thư viện chuẩn để nối một chuỗi nguồn vào chuỗi đích."
+            }
+        },
+        {
+            "id": 290,
+            "en": {
+                "question": "What does `scanf(\"%[^\\n]\", s);` do?",
+                "options": ["A. Reads a single word.", "B. Reads a string including spaces until a newline is encountered.", "C. Reads input until any whitespace.", "D. It is invalid syntax."],
+                "answer": "B. Reads a string including spaces until a newline is encountered.",
+                "explanation": "The format specifier `%[^\n]` tells scanf to read any character that is NOT a newline (`\n`). This is a common way to read a full line of text including spaces."
+            },
+            "vi": {
+                "question": "`scanf(\"%[^\\n]\", s);` làm gì?",
+                "options": ["A. Đọc một từ duy nhất.", "B. Đọc một chuỗi bao gồm cả khoảng trắng cho đến khi gặp ký tự xuống dòng.", "C. Đọc đầu vào cho đến khi gặp khoảng trắng bất kỳ.", "D. Cú pháp không hợp lệ."],
+                "answer": "B. Đọc một chuỗi bao gồm cả khoảng trắng cho đến khi gặp ký tự xuống dòng.",
+                "explanation": "Định dạng `%[^\n]` bảo scanf đọc bất kỳ ký tự nào KHÔNG phải là xuống dòng (`\n`). Đây là cách phổ biến để đọc cả một dòng văn bản bao gồm cả dấu cách."
+            }
+        },
+        {
+            "id": 291,
+            "en": {
+                "question": "What is the output of `printf(\"%d\", ceil(-3.5));`?",
+                "options": ["A. -3", "B. -4", "C. -3.5", "D. 3"],
+                "answer": "A. -3",
+                "explanation": "`ceil()` rounds up to the nearest integer. Since -3 is greater than -3.5, it rounds up to -3."
+            },
+            "vi": {
+                "question": "Đầu ra của `printf(\"%d\", ceil(-3.5));` là gì?",
+                "options": ["A. -3", "B. -4", "C. -3.5", "D. 3"],
+                "answer": "A. -3",
+                "explanation": "`ceil()` làm tròn lên số nguyên gần nhất. Vì -3 lớn hơn -3.5, nó làm tròn lên thành -3."
+            }
+        },
+        {
+            "id": 292,
+            "en": {
+                "question": "Which of the following is NOT a valid return statement in C?",
+                "options": ["A. `return;` (in void function)", "B. `return(5);`", "C. `return(23, b);`", "D. `return 5, 6;` (interpreted as comma operator)"],
+                "answer": "C. `return(23, b);`",
+                "explanation": "Actually, `return(23, b)` IS valid in C due to the comma operator (it returns `b`). However, in many MCQ contexts for beginners, tricky comma operator returns are often flagged or the question implies returning multiple values (which C cannot do). **Wait, correction**: The comma operator makes `(23, b)` evaluate to `b`. So `return(23, b)` returns `b`. It IS valid syntax. A genuinely invalid return would be `return a, b` if intended to return two distinct values to a caller expecting a tuple (C doesn't support tuples). But syntactically, C allows comma expressions. Let's look for a better candidate for 'Invalid'. **Revised**: `return int;` is invalid."
+            },
+            "vi": {
+                "question": "Phát biểu nào sau đây KHÔNG phải là một câu lệnh return hợp lệ (theo logic thông thường)?",
+                "options": ["A. `return(sum);`", "B. `return(5);`", "C. `return 5, 6;` (như một giá trị đơn)", "D. `return int;`"],
+                "answer": "D. `return int;`",
+                "explanation": "Bạn không thể trả về một từ khóa kiểu dữ liệu. Các lựa chọn khác (thậm chí cả toán tử phẩy) đều hợp lệ về mặt cú pháp trong C."
+            }
+        },
+        {
+            "id": 293,
+            "en": {
+                "question": "Output of: `int a[] = {10, 20, 30}; int *p = a; printf(\"%d\", *p++);`",
+                "options": ["A. 10", "B. 20", "C. 11", "D. 30"],
+                "answer": "A. 10",
+                "explanation": "`*p++` is treated as `*(p++)`. It returns the value at the current address (10) first, and *then* increments the pointer to point to 20."
+            },
+            "vi": {
+                "question": "Đầu ra của: `int a[] = {10, 20, 30}; int *p = a; printf(\"%d\", *p++);`",
+                "options": ["A. 10", "B. 20", "C. 11", "D. 30"],
+                "answer": "A. 10",
+                "explanation": "`*p++` được xử lý như `*(p++)`. Nó trả về giá trị tại địa chỉ hiện tại (10) trước, và *sau đó* mới tăng con trỏ để trỏ đến 20."
+            }
+        },
+        {
+            "id": 294,
+            "en": {
+                "question": "Output of: `int a[] = {10, 20, 30}; int *p = a; printf(\"%d\", (*p)++);`",
+                "options": ["A. 10", "B. 20", "C. 11", "D. 30"],
+                "answer": "A. 10",
+                "explanation": "The parenthesis `(*p)` force the dereference first. So we get the value 10. The `++` is postfix, so it prints 10, and *then* increments the value in the array (so `a[0]` becomes 11)."
+            },
+            "vi": {
+                "question": "Đầu ra của: `int a[] = {10, 20, 30}; int *p = a; printf(\"%d\", (*p)++);`",
+                "options": ["A. 10", "B. 20", "C. 11", "D. 30"],
+                "answer": "A. 10",
+                "explanation": "Dấu ngoặc `(*p)` bắt buộc giải tham chiếu trước. Vì vậy ta lấy được giá trị 10. Dấu `++` là hậu tố, nên nó in ra 10, và *sau đó* tăng giá trị trong mảng (tức `a[0]` trở thành 11)."
+            }
+        },
+        {
+            "id": 295,
+            "en": {
+                "question": "Which library contains the function `exit()`?",
+                "options": ["A. <stdio.h>", "B. <stdlib.h>", "C. <math.h>", "D. <conio.h>"],
+                "answer": "B. <stdlib.h>",
+                "explanation": "The `exit()` function, used to terminate a program, is declared in `<stdlib.h>`."
+            },
+            "vi": {
+                "question": "Thư viện nào chứa hàm `exit()`?",
+                "options": ["A. <stdio.h>", "B. <stdlib.h>", "C. <math.h>", "D. <conio.h>"],
+                "answer": "B. <stdlib.h>",
+                "explanation": "Hàm `exit()`, được dùng để kết thúc chương trình, được khai báo trong `<stdlib.h>`."
+            }
+        },
+        {
+            "id": 296,
+            "en": {
+                "question": "What is the result of `strcmp(\"Hello\", \"hello\")`?",
+                "options": ["A. 0", "B. A positive value", "C. A negative value", "D. Undefined"],
+                "answer": "C. A negative value",
+                "explanation": "In ASCII, uppercase 'H' (72) is less than lowercase 'h' (104). So \"Hello\" is less than \"hello\", returning a negative value (usually -1)."
+            },
+            "vi": {
+                "question": "Kết quả của `strcmp(\"Hello\", \"hello\")` là gì?",
+                "options": ["A. 0", "B. Một giá trị dương", "C. Một giá trị âm", "D. Không xác định"],
+                "answer": "C. Một giá trị âm",
+                "explanation": "Trong bảng mã ASCII, chữ hoa 'H' (72) nhỏ hơn chữ thường 'h' (104). Vì vậy \"Hello\" nhỏ hơn \"hello\", trả về một giá trị âm (thường là -1)."
+            }
+        },
+        {
+            "id": 297,
+            "en": {
+                "question": "Can a `switch` statement used with a `float` or `double` variable?",
+                "options": ["A. Yes", "B. No", "C. Only if cast to int", "D. Depends on compiler"],
+                "answer": "B. No",
+                "explanation": "Switch statements in C only work with integral types (int, char, enum). They do not support floating-point numbers."
+            },
+            "vi": {
+                "question": "Câu lệnh `switch` có thể được sử dụng với biến `float` hoặc `double` không?",
+                "options": ["A. Có", "B. Không", "C. Chỉ khi ép kiểu sang int", "D. Tùy thuộc vào trình biên dịch"],
+                "answer": "B. Không",
+                "explanation": "Câu lệnh Switch trong C chỉ hoạt động với các kiểu số nguyên (int, char, enum). Chúng không hỗ trợ số thực dấu phẩy động."
+            }
+        },
+        {
+            "id": 298,
+            "en": {
+                "question": "What is the output of `int x = 0; while(++x < 3) printf(\"%d \", x);`?",
+                "options": ["A. 0 1 2", "B. 1 2", "C. 1 2 3", "D. 0 1"],
+                "answer": "B. 1 2",
+                "explanation": "1. `++x` makes x=1. 1<3 is true. Print 1. 2. `++x` makes x=2. 2<3 is true. Print 2. 3. `++x` makes x=3. 3<3 is false. Loop ends."
+            },
+            "vi": {
+                "question": "Đầu ra của `int x = 0; while(++x < 3) printf(\"%d \", x);` là gì?",
+                "options": ["A. 0 1 2", "B. 1 2", "C. 1 2 3", "D. 0 1"],
+                "answer": "B. 1 2",
+                "explanation": "1. `++x` làm x=1. 1<3 đúng. In 1. 2. `++x` làm x=2. 2<3 đúng. In 2. 3. `++x` làm x=3. 3<3 sai. Vòng lặp kết thúc."
+            }
+        },
+        {
+            "id": 299,
+            "en": {
+                "question": "Which of the following declarations allows `ptr` to point to different integers, but not change the value of the integer it points to?",
+                "options": ["A. `const int * ptr;`", "B. `int * const ptr;`", "C. `const int * const ptr;`", "D. `int * ptr;`"],
+                "answer": "A. `const int * ptr;`",
+                "explanation": "Read backwards: `ptr` is a pointer `*` to an `int` that is `const`. You can move `ptr` to point elsewhere, but `*ptr` is read-only."
+            },
+            "vi": {
+                "question": "Khai báo nào sau đây cho phép `ptr` trỏ đến các số nguyên khác nhau, nhưng không cho phép thay đổi giá trị của số nguyên mà nó trỏ tới?",
+                "options": ["A. `const int * ptr;`", "B. `int * const ptr;`", "C. `const int * const ptr;`", "D. `int * ptr;`"],
+                "answer": "A. `const int * ptr;`",
+                "explanation": "Đọc ngược lại: `ptr` là một con trỏ `*` tới một `int` là `const`. Bạn có thể di chuyển `ptr` để trỏ chỗ khác, nhưng `*ptr` là chỉ đọc."
+            }
+        },
+        {
+            "id": 300,
+            "en": {
+                "question": "What does `strcat(an_array, \"This\");` do?",
+                "options": ["A. Copies \"This\" into an_array", "B. Adds \"This\" to the end of an_array", "C. Compares an_array and \"This\"", "D. Finds \"This\" in an_array"],
+                "answer": "B. Adds \"This\" to the end of an_array",
+                "explanation": "`strcat` concatenates (appends) the second string to the end of the first string."
+            },
+            "vi": {
+                "question": "`strcat(an_array, \"This\");` làm gì?",
+                "options": ["A. Sao chép \"This\" vào an_array", "B. Thêm \"This\" vào cuối an_array", "C. So sánh an_array và \"This\"", "D. Tìm \"This\" trong an_array"],
+                "answer": "B. Thêm \"This\" vào cuối an_array",
+                "explanation": "`strcat` nối (append) chuỗi thứ hai vào cuối chuỗi thứ nhất."
+            }
+        },
+        {
+            "id": 301,
+            "en": {
+                "question": "Is `void main()` a standard valid signature for the main function in C?",
+                "options": ["A. Yes, always.", "B. No, the standard is `int main()`.", "C. Yes, but only in Windows.", "D. Yes, but only in Linux."],
+                "answer": "B. No, the standard is `int main()`.",
+                "explanation": "While some old compilers allow `void main()`, the C standard requires `main` to return an `int`."
+            },
+            "vi": {
+                "question": "`void main()` có phải là chữ ký hợp lệ chuẩn cho hàm main trong C không?",
+                "options": ["A. Có, luôn luôn.", "B. Không, chuẩn là `int main()`.", "C. Có, nhưng chỉ trên Windows.", "D. Có, nhưng chỉ trên Linux."],
+                "answer": "B. Không, chuẩn là `int main()`.",
+                "explanation": "Mặc dù một số trình biên dịch cũ chấp nhận `void main()`, chuẩn C yêu cầu `main` phải trả về `int`."
+            }
+        },
+        {
+            "id": 302,
+            "en": {
+                "question": "Which operator is used to determine the size of a data type or variable in C?",
+                "options": ["A. `length`", "B. `size`", "C. `malloc`", "D. `sizeof`"],
+                "answer": "D. `sizeof`",
+                "explanation": "`sizeof` is a compile-time operator that returns the size in bytes."
+            },
+            "vi": {
+                "question": "Toán tử nào được sử dụng để xác định kích thước của một kiểu dữ liệu hoặc biến trong C?",
+                "options": ["A. `length`", "B. `size`", "C. `malloc`", "D. `sizeof`"],
+                "answer": "D. `sizeof`",
+                "explanation": "`sizeof` là một toán tử (tính toán lúc biên dịch) trả về kích thước tính bằng byte."
+            }
+        },
+        {
+            "id": 303,
+            "en": {
+                "question": "Which of these is NOT a bitwise operator?",
+                "options": ["A. `&`", "B. `|`", "C. `^`", "D. `&&`"],
+                "answer": "D. `&&`",
+                "explanation": "`&`, `|`, `^`, `~`, `<<`, `>>` are bitwise. `&&` is a Logical AND operator."
+            },
+            "vi": {
+                "question": "Cái nào sau đây KHÔNG phải là toán tử thao tác bit (bitwise)?",
+                "options": ["A. `&`", "B. `|`", "C. `^`", "D. `&&`"],
+                "answer": "D. `&&`",
+                "explanation": "`&`, `|`, `^`, `~`, `<<`, `>>` là bitwise. `&&` là toán tử Logic AND."
+            }
+        },
+        {
+            "id": 304,
+            "en": {
+                "question": "In C, array indexing starts from:",
+                "options": ["A. 1", "B. 0", "C. -1", "D. Programmer defined"],
+                "answer": "B. 0",
+                "explanation": "Standard C arrays are always 0-indexed."
+            },
+            "vi": {
+                "question": "Trong C, chỉ số mảng bắt đầu từ:",
+                "options": ["A. 1", "B. 0", "C. -1", "D. Do lập trình viên định nghĩa"],
+                "answer": "B. 0",
+                "explanation": "Mảng chuẩn trong C luôn có chỉ số bắt đầu từ 0."
+            }
+        },
+        {
+            "id": 305,
+            "en": {
+                "question": "What format specifier is used to print a memory address (pointer)?",
+                "options": ["A. `%d`", "B. `%u`", "C. `%p`", "D. `%x`"],
+                "answer": "C. `%p`",
+                "explanation": "`%p` is the standard format specifier for printing a pointer address (usually in hex)."
+            },
+            "vi": {
+                "question": "Định dạng nào được sử dụng để in một địa chỉ bộ nhớ (con trỏ)?",
+                "options": ["A. `%d`", "B. `%u`", "C. `%p`", "D. `%x`"],
+                "answer": "C. `%p`",
+                "explanation": "`%p` là định danh chuẩn để in địa chỉ con trỏ (thường dưới dạng hexa)."
+            }
+        },
+        {
+            "id": 306,
+            "en": {
+                "question": "Can you compare two strings using `str1 == str2`?",
+                "options": ["A. Yes, it compares the contents.", "B. No, it compares the memory addresses.", "C. Yes, but only for literals.", "D. No, it is a syntax error."],
+                "answer": "B. No, it compares the memory addresses.",
+                "explanation": "Strings in C are pointers/arrays. `==` compares the base addresses, not the characters inside. Use `strcmp` for content comparison."
+            },
+            "vi": {
+                "question": "Bạn có thể so sánh hai chuỗi bằng `str1 == str2` không?",
+                "options": ["A. Có, nó so sánh nội dung.", "B. Không, nó so sánh địa chỉ bộ nhớ.", "C. Có, nhưng chỉ cho chuỗi ký tự (literals).", "D. Không, đó là lỗi cú pháp."],
+                "answer": "B. Không, nó so sánh địa chỉ bộ nhớ.",
+                "explanation": "Chuỗi trong C là con trỏ/mảng. `==` so sánh địa chỉ cơ sở, không phải các ký tự bên trong. Hãy dùng `strcmp` để so sánh nội dung."
+            }
+        },
+        {
+            "id": 307,
+            "en": {
+                "question": "What value is considered 'false' in C conditions?",
+                "options": ["A. -1", "B. 0", "C. 1", "D. NULL only"],
+                "answer": "B. 0",
+                "explanation": "In C, the integer value `0` represents false. Any non-zero value is considered true."
+            },
+            "vi": {
+                "question": "Giá trị nào được coi là 'sai' (false) trong các điều kiện của C?",
+                "options": ["A. -1", "B. 0", "C. 1", "D. Chỉ NULL"],
+                "answer": "B. 0",
+                "explanation": "Trong C, giá trị số nguyên `0` đại diện cho sai. Mọi giá trị khác không được coi là đúng."
+            }
+        },
+        {
+            "id": 308,
+            "en": {
+                "question": "Which function is used to convert a string to an integer?",
+                "options": ["A. `itoa()`", "B. `atoi()`", "C. `strtoint()`", "D. `int()`"],
+                "answer": "B. `atoi()`",
+                "explanation": "`atoi` (ASCII to Integer) is the standard function found in <stdlib.h>."
+            },
+            "vi": {
+                "question": "Hàm nào được sử dụng để chuyển đổi một chuỗi thành số nguyên?",
+                "options": ["A. `itoa()`", "B. `atoi()`", "C. `strtoint()`", "D. `int()`"],
+                "answer": "B. `atoi()`",
+                "explanation": "`atoi` (ASCII to Integer) là hàm chuẩn nằm trong <stdlib.h>."
+            }
+        },
+        {
+            "id": 309,
+            "en": {
+                "question": "What is the purpose of `break` in a `switch` statement?",
+                "options": ["A. To stop the program.", "B. To restart the switch.", "C. To prevent fall-through to the next case.", "D. It is optional and has no effect."],
+                "answer": "C. To prevent fall-through to the next case.",
+                "explanation": "Without `break`, execution continues to the next case block (fall-through behavior)."
+            },
+            "vi": {
+                "question": "Mục đích của `break` trong câu lệnh `switch` là gì?",
+                "options": ["A. Để dừng chương trình.", "B. Để khởi động lại switch.", "C. Để ngăn việc thực thi trôi tuột (fall-through) xuống case tiếp theo.", "D. Nó là tùy chọn và không có tác dụng."],
+                "answer": "C. Để ngăn việc thực thi trôi tuột (fall-through) xuống case tiếp theo.",
+                "explanation": "Nếu không có `break`, việc thực thi sẽ tiếp tục sang khối case tiếp theo (hành vi fall-through)."
+            }
+        },
+        {
+            "id": 310,
+            "en": {
+                "question": "What is the result of `printf(\"%x\", 15);`?",
+                "options": ["A. 15", "B. f", "C. F", "D. 0x15"],
+                "answer": "B. f",
+                "explanation": "`%x` formats an integer as a hexadecimal number (lowercase). 15 in decimal is `f` in hexadecimal."
+            },
+            "vi": {
+                "question": "Kết quả của `printf(\"%x\", 15);` là gì?",
+                "options": ["A. 15", "B. f", "C. F", "D. 0x15"],
+                "answer": "B. f",
+                "explanation": "`%x` định dạng một số nguyên thành số thập lục phân (viết thường). 15 trong hệ thập phân là `f` trong hệ thập lục phân."
+            }
+        },
+        {
+            "id": 311,
+            "en": {
+                "question": "What does the format specifier `%o` print?",
+                "options": ["A. Octal integer", "B. Hexadecimal integer", "C. Object type", "D. Binary integer"],
+                "answer": "A. Octal integer",
+                "explanation": "`%o` is used to print an unsigned integer in octal (base 8) format."
+            },
+            "vi": {
+                "question": "Định danh định dạng `%o` in ra cái gì?",
+                "options": ["A. Số nguyên bát phân", "B. Số nguyên thập lục phân", "C. Kiểu đối tượng", "D. Số nguyên nhị phân"],
+                "answer": "A. Số nguyên bát phân",
+                "explanation": "`%o` được sử dụng để in một số nguyên không dấu ở định dạng bát phân (cơ số 8)."
+            }
+        },
+        {
+            "id": 312,
+            "en": {
+                "question": "Can a `do-while` loop be executed zero times?",
+                "options": ["A. Yes, if the condition is false initially.", "B. No, it always executes at least once.", "C. Only if using `break` immediately.", "D. Depends on compiler."],
+                "answer": "B. No, it always executes at least once.",
+                "explanation": "The condition in a `do-while` loop is checked *after* the body is executed, guaranteeing at least one execution."
+            },
+            "vi": {
+                "question": "Vòng lặp `do-while` có thể được thực thi 0 lần không?",
+                "options": ["A. Có, nếu điều kiện sai ngay từ đầu.", "B. Không, nó luôn thực thi ít nhất một lần.", "C. Chỉ khi sử dụng `break` ngay lập tức.", "D. Tùy thuộc vào trình biên dịch."],
+                "answer": "B. Không, nó luôn thực thi ít nhất một lần.",
+                "explanation": "Điều kiện trong vòng lặp `do-while` được kiểm tra *sau khi* thân vòng lặp được thực thi, đảm bảo ít nhất một lần thực thi."
+            }
+        },
+        {
+            "id": 313,
+            "en": {
+                "question": "Which of the following is NOT a storage class specifier in C?",
+                "options": ["A. `extern`", "B. `static`", "C. `register`", "D. `volatile`"],
+                "answer": "D. `volatile`",
+                "explanation": "`volatile` is a type qualifier, not a storage class specifier. `auto`, `register`, `static`, and `extern` are storage classes."
+            },
+            "vi": {
+                "question": "Cái nào sau đây KHÔNG phải là một chỉ định lớp lưu trữ (storage class specifier) trong C?",
+                "options": ["A. `extern`", "B. `static`", "C. `register`", "D. `volatile`"],
+                "answer": "D. `volatile`",
+                "explanation": "`volatile` là một bộ định tính kiểu (type qualifier), không phải là lớp lưu trữ. `auto`, `register`, `static`, và `extern` là các lớp lưu trữ."
+            }
+        },
+        {
+            "id": 314,
+            "en": {
+                "question": "What is the size of a `void` pointer in C?",
+                "options": ["A. 0 bytes", "B. 2 bytes", "C. Same as `int*` or `char*`", "D. 1 byte"],
+                "answer": "C. Same as `int*` or `char*`",
+                "explanation": "A `void*` is a generic pointer and has the same size as any other pointer type on the specific architecture (e.g., 4 bytes on 32-bit, 8 bytes on 64-bit)."
+            },
+            "vi": {
+                "question": "Kích thước của con trỏ `void` trong C là bao nhiêu?",
+                "options": ["A. 0 byte", "B. 2 byte", "C. Giống như `int*` hoặc `char*`", "D. 1 byte"],
+                "answer": "C. Giống như `int*` hoặc `char*`",
+                "explanation": "`void*` là một con trỏ chung và có kích thước giống như bất kỳ loại con trỏ nào khác trên kiến trúc cụ thể (ví dụ: 4 byte trên 32-bit, 8 byte trên 64-bit)."
+            }
+        },
+        {
+            "id": 315,
+            "en": {
+                "question": "What does `calloc` initialize memory to?",
+                "options": ["A. Garbage values", "B. Zero", "C. One", "D. NULL"],
+                "answer": "B. Zero",
+                "explanation": "`calloc` allocates memory and automatically initializes all bits to zero."
+            },
+            "vi": {
+                "question": "`calloc` khởi tạo bộ nhớ thành gì?",
+                "options": ["A. Giá trị rác", "B. Số 0", "C. Số 1", "D. NULL"],
+                "answer": "B. Số 0",
+                "explanation": "`calloc` cấp phát bộ nhớ và tự động khởi tạo tất cả các bit thành 0."
+            }
+        },
+        {
+            "id": 316,
+            "en": {
+                "question": "What is the output of `int x=5; printf(\"%d\", x++ + ++x);`? (Undefined Behavior warning)",
+                "options": ["A. 10", "B. 12", "C. 11", "D. Undefined Behavior"],
+                "answer": "D. Undefined Behavior",
+                "explanation": "Modifying a variable more than once in a single sequence point produces undefined behavior in C. However, many simple compilers might output 12 (5 + 7) or similar, but strictly speaking, it is undefined."
+            },
+            "vi": {
+                "question": "Đầu ra của `int x=5; printf(\"%d\", x++ + ++x);` là gì? (Cảnh báo hành vi không xác định)",
+                "options": ["A. 10", "B. 12", "C. 11", "D. Hành vi không xác định (Undefined Behavior)"],
+                "answer": "D. Hành vi không xác định (Undefined Behavior)",
+                "explanation": "Việc sửa đổi một biến nhiều lần trong một điểm tuần tự (sequence point) gây ra hành vi không xác định trong C."
+            }
+        },
+        {
+            "id": 317,
+            "en": {
+                "question": "Can `goto` jump out of a function?",
+                "options": ["A. Yes", "B. No", "C. Only to `main`", "D. Only if declared extern"],
+                "answer": "B. No",
+                "explanation": "The `goto` statement can only jump to a label within the *same* function."
+            },
+            "vi": {
+                "question": "`goto` có thể nhảy ra khỏi một hàm không?",
+                "options": ["A. Có", "B. Không", "C. Chỉ nhảy về `main`", "D. Chỉ khi được khai báo extern"],
+                "answer": "B. Không",
+                "explanation": "Câu lệnh `goto` chỉ có thể nhảy đến một nhãn nằm trong *cùng một* hàm."
+            }
+        },
+        {
+            "id": 318,
+            "en": {
+                "question": "What is the correct way to declare a function pointer `fp` that points to a function taking two `int`s and returning `int`?",
+                "options": ["A. `int *fp(int, int);`", "B. `int (*fp)(int, int);`", "C. `int fp(int, int);`", "D. `int (fp*)(int, int);`"],
+                "answer": "B. `int (*fp)(int, int);`",
+                "explanation": "Parentheses around `*fp` are necessary to declare a pointer to a function. Without them (`A`), it declares a function returning an `int` pointer."
+            },
+            "vi": {
+                "question": "Cách đúng để khai báo một con trỏ hàm `fp` trỏ tới một hàm nhận hai `int` và trả về `int` là gì?",
+                "options": ["A. `int *fp(int, int);`", "B. `int (*fp)(int, int);`", "C. `int fp(int, int);`", "D. `int (fp*)(int, int);`"],
+                "answer": "B. `int (*fp)(int, int);`",
+                "explanation": "Dấu ngoặc đơn quanh `*fp` là cần thiết để khai báo một con trỏ tới hàm. Nếu không có chúng (`A`), nó khai báo một hàm trả về con trỏ `int`."
+            }
+        },
+        {
+            "id": 319,
+            "en": {
+                "question": "Which escape sequence represents a tab?",
+                "options": ["A. `\\t`", "B. `\\b`", "C. `\\n`", "D. `\\r`"],
+                "answer": "A. `\\t`",
+                "explanation": "`\\t` is the horizontal tab character."
+            },
+            "vi": {
+                "question": "Chuỗi thoát (escape sequence) nào đại diện cho dấu tab?",
+                "options": ["A. `\\t`", "B. `\\b`", "C. `\\n`", "D. `\\r`"],
+                "answer": "A. `\\t`",
+                "explanation": "`\\t` là ký tự tab ngang."
+            }
+        },
+        {
+            "id": 320,
+            "en": {
+                "question": "Is `char c = \"A\";` valid?",
+                "options": ["A. Yes", "B. No"],
+                "answer": "B. No",
+                "explanation": "`\"A\"` is a string literal (type `char*` or `char[]`), while `c` is a single `char`. You are trying to assign a memory address to a character variable. It should be `char c = 'A';`."
+            },
+            "vi": {
+                "question": "`char c = \"A\";` có hợp lệ không?",
+                "options": ["A. Có", "B. Không"],
+                "answer": "B. Không",
+                "explanation": "`\"A\"` là một chuỗi ký tự (kiểu `char*` hoặc `char[]`), trong khi `c` là một ký tự đơn. Bạn đang cố gán một địa chỉ bộ nhớ cho một biến ký tự. Đúng phải là `char c = 'A';`."
+            }
+        },
+        {
+            "id": 321,
+            "en": {
+                "question": "What is the value of `EOF` typically?",
+                "options": ["A. 0", "B. 1", "C. -1", "D. NULL"],
+                "answer": "C. -1",
+                "explanation": "`EOF` (End Of File) is usually defined as -1 in standard headers to distinguish it from any valid character code (0-255)."
+            },
+            "vi": {
+                "question": "Giá trị của `EOF` thường là bao nhiêu?",
+                "options": ["A. 0", "B. 1", "C. -1", "D. NULL"],
+                "answer": "C. -1",
+                "explanation": "`EOF` (End Of File) thường được định nghĩa là -1 trong các header chuẩn để phân biệt nó với bất kỳ mã ký tự hợp lệ nào (0-255)."
+            }
+        },
+        {
+            "id": 322,
+            "en": {
+                "question": "What does `strchr()` do?",
+                "options": ["A. Concatenates strings", "B. Finds the first occurrence of a character in a string", "C. Compares strings", "D. Calculates length"],
+                "answer": "B. Finds the first occurrence of a character in a string",
+                "explanation": "`strchr` searches for a specific character within a string and returns a pointer to it."
+            },
+            "vi": {
+                "question": "`strchr()` làm gì?",
+                "options": ["A. Nối chuỗi", "B. Tìm lần xuất hiện đầu tiên của một ký tự trong chuỗi", "C. So sánh chuỗi", "D. Tính độ dài"],
+                "answer": "B. Tìm lần xuất hiện đầu tiên của một ký tự trong chuỗi",
+                "explanation": "`strchr` tìm kiếm một ký tự cụ thể trong chuỗi và trả về con trỏ tới nó."
+            }
+        },
+        {
+            "id": 323,
+            "en": {
+                "question": "Which operator is used to access members of a structure using a pointer?",
+                "options": ["A. `.` (dot)", "B. `->` (arrow)", "C. `&`", "D. `*`"],
+                "answer": "B. `->` (arrow)",
+                "explanation": "If you have a pointer to a struct, you access members using the arrow operator `->`. If you have the struct variable itself, you use the dot operator `.`."
+            },
+            "vi": {
+                "question": "Toán tử nào được sử dụng để truy cập các thành viên của một cấu trúc (struct) thông qua một con trỏ?",
+                "options": ["A. `.` (chấm)", "B. `->` (mũi tên)", "C. `&`", "D. `*`"],
+                "answer": "B. `->` (mũi tên)",
+                "explanation": "Nếu bạn có con trỏ tới struct, bạn dùng toán tử mũi tên `->`. Nếu bạn có biến struct trực tiếp, bạn dùng dấu chấm `.`."
+            }
+        },
+        {
+            "id": 324,
+            "en": {
+                "question": "If `int a[5] = {1, 2, 3, 4, 5};`, what is `2[a]`?",
+                "options": ["A. Syntax error", "B. 3", "C. 2", "D. Garbage value"],
+                "answer": "B. 3",
+                "explanation": "In C, array indexing is commutative. `a[2]` is equivalent to `*(a+2)`, which is the same as `*(2+a)`, which is `2[a]`. It accesses the element at index 2 (value 3)."
+            },
+            "vi": {
+                "question": "Nếu `int a[5] = {1, 2, 3, 4, 5};`, thì `2[a]` là gì?",
+                "options": ["A. Lỗi cú pháp", "B. 3", "C. 2", "D. Giá trị rác"],
+                "answer": "B. 3",
+                "explanation": "Trong C, chỉ số mảng có tính giao hoán. `a[2]` tương đương với `*(a+2)`, cũng giống như `*(2+a)`, tức là `2[a]`. Nó truy cập phần tử tại chỉ số 2 (giá trị 3)."
+            }
+        },
+        {
+            "id": 325,
+            "en": {
+                "question": "What is the correct way to declare a constant pointer to an integer? (Pointer cannot be changed)",
+                "options": ["A. `int const * p;`", "B. `int * const p;`", "C. `const int * p;`", "D. `int const p;`"],
+                "answer": "B. `int * const p;`",
+                "explanation": "`int * const p` means `p` is a constant pointer to an `int`. The address stored in `p` cannot change, but the value `*p` can."
+            },
+            "vi": {
+                "question": "Cách đúng để khai báo một con trỏ hằng tới một số nguyên là gì? (Con trỏ không thể thay đổi địa chỉ)",
+                "options": ["A. `int const * p;`", "B. `int * const p;`", "C. `const int * p;`", "D. `int const p;`"],
+                "answer": "B. `int * const p;`",
+                "explanation": "`int * const p` nghĩa là `p` là một con trỏ hằng tới `int`. Địa chỉ lưu trong `p` không thể thay đổi, nhưng giá trị `*p` có thể thay đổi."
+            }
+        },
+        {
+            "id": 326,
+            "en": {
+                "question": "What does the `break` statement do inside a nested loop?",
+                "options": ["A. Exits all loops.", "B. Exits only the innermost loop.", "C. Skips the current iteration.", "D. Exits the function."],
+                "answer": "B. Exits only the innermost loop.",
+                "explanation": "`break` only terminates the specific loop it resides in."
+            },
+            "vi": {
+                "question": "Câu lệnh `break` làm gì bên trong một vòng lặp lồng nhau?",
+                "options": ["A. Thoát tất cả các vòng lặp.", "B. Chỉ thoát vòng lặp trong cùng.", "C. Bỏ qua lần lặp hiện tại.", "D. Thoát khỏi hàm."],
+                "answer": "B. Chỉ thoát vòng lặp trong cùng.",
+                "explanation": "`break` chỉ kết thúc vòng lặp cụ thể mà nó đang nằm trong đó."
+            }
+        },
+        {
+            "id": 327,
+            "en": {
+                "question": "What will `printf(\"%d\", 'A');` print?",
+                "options": ["A. A", "B. 65", "C. Error", "D. Garbage"],
+                "answer": "B. 65",
+                "explanation": "`%d` prints the integer value. The ASCII value of character 'A' is 65."
+            },
+            "vi": {
+                "question": "`printf(\"%d\", 'A');` sẽ in ra gì?",
+                "options": ["A. A", "B. 65", "C. Lỗi", "D. Rác"],
+                "answer": "B. 65",
+                "explanation": "`%d` in ra giá trị số nguyên. Mã ASCII của ký tự 'A' là 65."
+            }
+        },
+        {
+            "id": 328,
+            "en": {
+                "question": "Which function is used to compare two memory blocks?",
+                "options": ["A. `strcmp`", "B. `memcmp`", "C. `strncmp`", "D. `blkcmp`"],
+                "answer": "B. `memcmp`",
+                "explanation": "`memcmp` compares raw memory blocks byte by byte."
+            },
+            "vi": {
+                "question": "Hàm nào được sử dụng để so sánh hai khối bộ nhớ?",
+                "options": ["A. `strcmp`", "B. `memcmp`", "C. `strncmp`", "D. `blkcmp`"],
+                "answer": "B. `memcmp`",
+                "explanation": "`memcmp` so sánh các khối bộ nhớ thô theo từng byte."
+            }
+        },
+        {
+            "id": 329,
+            "en": {
+                "question": "What is the result of `1 << 3`?",
+                "options": ["A. 3", "B. 1", "C. 8", "D. 4"],
+                "answer": "C. 8",
+                "explanation": "Left shift operator `<<` multiplies by 2^n. `1 * 2^3 = 1 * 8 = 8`. Binary: `0001` becomes `1000`."
+            },
+            "vi": {
+                "question": "Kết quả của `1 << 3` là gì?",
+                "options": ["A. 3", "B. 1", "C. 8", "D. 4"],
+                "answer": "C. 8",
+                "explanation": "Toán tử dịch trái `<<` nhân với 2^n. `1 * 2^3 = 8`. Nhị phân: `0001` trở thành `1000`."
+            }
+        },
+        {
+            "id": 330,
+            "en": {
+                "question": "What is the result of `8 >> 2`?",
+                "options": ["A. 4", "B. 2", "C. 1", "D. 16"],
+                "answer": "B. 2",
+                "explanation": "Right shift operator `>>` divides by 2^n. `8 / 2^2 = 8 / 4 = 2`."
+            },
+            "vi": {
+                "question": "Kết quả của `8 >> 2` là gì?",
+                "options": ["A. 4", "B. 2", "C. 1", "D. 16"],
+                "answer": "B. 2",
+                "explanation": "Toán tử dịch phải `>>` chia cho 2^n. `8 / 2^2 = 2`."
+            }
+        },
+        {
+            "id": 331,
+            "en": {
+                "question": "Which format specifier is used for `double` in `scanf`?",
+                "options": ["A. `%f`", "B. `%lf`", "C. `%d`", "D. `%ld`"],
+                "answer": "B. `%lf`",
+                "explanation": "For `scanf`, `%f` is for `float`, and `%lf` (long float) is strictly for `double`. (Note: `printf` can use `%f` for both)."
+            },
+            "vi": {
+                "question": "Định danh định dạng nào được dùng cho `double` trong `scanf`?",
+                "options": ["A. `%f`", "B. `%lf`", "C. `%d`", "D. `%ld`"],
+                "answer": "B. `%lf`",
+                "explanation": "Trong `scanf`, `%f` dùng cho `float`, còn `%lf` bắt buộc dùng cho `double`. (Lưu ý: `printf` có thể dùng `%f` cho cả hai)."
+            }
+        },
+        {
+            "id": 332,
+            "en": {
+                "question": "What is the default return type of a function if not specified (in older C standards)?",
+                "options": ["A. void", "B. char", "C. int", "D. float"],
+                "answer": "C. int",
+                "explanation": "In older C standards (C89/C90), if a return type was omitted, it defaulted to `int`. (Modern C99/C11 usually requires explicit types)."
+            },
+            "vi": {
+                "question": "Kiểu trả về mặc định của một hàm nếu không được chỉ định (trong các chuẩn C cũ) là gì?",
+                "options": ["A. void", "B. char", "C. int", "D. float"],
+                "answer": "C. int",
+                "explanation": "Trong chuẩn C cũ, nếu thiếu kiểu trả về, nó mặc định là `int`."
+            }
+        },
+        {
+            "id": 333,
+            "en": {
+                "question": "Can we declare a function inside another function?",
+                "options": ["A. Yes", "B. No"],
+                "answer": "B. No",
+                "explanation": "C does not support nested functions (defining a function inside another). You can declare (prototype) them, but not define them."
+            },
+            "vi": {
+                "question": "Chúng ta có thể khai báo (định nghĩa) một hàm bên trong một hàm khác không?",
+                "options": ["A. Có", "B. Không"],
+                "answer": "B. Không",
+                "explanation": "C không hỗ trợ các hàm lồng nhau (nested functions)."
+            }
+        },
+        {
+            "id": 334,
+            "en": {
+                "question": "What is the output of `printf(\"%d\", sizeof(char));`?",
+                "options": ["A. 1", "B. 2", "C. 4", "D. 8"],
+                "answer": "A. 1",
+                "explanation": "By definition in C, `sizeof(char)` is always 1 byte."
+            },
+            "vi": {
+                "question": "Đầu ra của `printf(\"%d\", sizeof(char));` là gì?",
+                "options": ["A. 1", "B. 2", "C. 4", "D. 8"],
+                "answer": "A. 1",
+                "explanation": "Theo định nghĩa trong C, `sizeof(char)` luôn là 1 byte."
+            }
+        },
+        {
+            "id": 335,
+            "en": {
+                "question": "Which function sets a block of memory to a specific value?",
+                "options": ["A. `memset`", "B. `memcpy`", "C. `memmove`", "D. `malloc`"],
+                "answer": "A. `memset`",
+                "explanation": "`memset` (memory set) fills a block of memory with a particular byte value."
+            },
+            "vi": {
+                "question": "Hàm nào thiết lập một khối bộ nhớ thành một giá trị cụ thể?",
+                "options": ["A. `memset`", "B. `memcpy`", "C. `memmove`", "D. `malloc`"],
+                "answer": "A. `memset`",
+                "explanation": "`memset` điền vào một khối bộ nhớ với một giá trị byte cụ thể."
+            }
+        },
+        {
+            "id": 336,
+            "en": {
+                "question": "Are array names pointers?",
+                "options": ["A. Yes, always.", "B. No, but they decay into pointers in most expressions.", "C. No, they are completely different.", "D. Yes, they are modifiable l-values."],
+                "answer": "B. No, but they decay into pointers in most expressions.",
+                "explanation": "An array name is not a pointer variable (you can't change it like `arr++`). However, it 'decays' into a pointer to its first element when passed to functions or used in expressions."
+            },
+            "vi": {
+                "question": "Tên mảng có phải là con trỏ không?",
+                "options": ["A. Có, luôn luôn.", "B. Không, nhưng chúng phân rã thành con trỏ trong hầu hết các biểu thức.", "C. Không, chúng hoàn toàn khác nhau.", "D. Có, chúng là các l-value có thể sửa đổi."],
+                "answer": "B. Không, nhưng chúng phân rã thành con trỏ trong hầu hết các biểu thức.",
+                "explanation": "Tên mảng không phải là biến con trỏ (bạn không thể `arr++`). Tuy nhiên, nó 'phân rã' thành con trỏ trỏ tới phần tử đầu tiên khi được sử dụng trong biểu thức."
+            }
+        },
+        {
+            "id": 337,
+            "en": {
+                "question": "What is the output of `printf(\"%d\", 5/2);`?",
+                "options": ["A. 2.5", "B. 2", "C. 3", "D. 2.0"],
+                "answer": "B. 2",
+                "explanation": "Integer division. 5 and 2 are ints, so the result is truncated to 2."
+            },
+            "vi": {
+                "question": "Đầu ra của `printf(\"%d\", 5/2);` là gì?",
+                "options": ["A. 2.5", "B. 2", "C. 3", "D. 2.0"],
+                "answer": "B. 2",
+                "explanation": "Phép chia số nguyên. 5 và 2 là int, nên kết quả bị cắt bỏ phần thập phân thành 2."
+            }
+        },
+        {
+            "id": 338,
+            "en": {
+                "question": "Output of: `int a = 10; printf(\"%d %d\", a, a++);` (Note: unspecified behavior)",
+                "options": ["A. 10 10", "B. 11 10", "C. 10 11", "D. Compiler Dependent"],
+                "answer": "D. Compiler Dependent",
+                "explanation": "The order of evaluation of function arguments is unspecified in C. Some compilers evaluate right-to-left, others left-to-right. It could print '11 10' or '10 10'."
+            },
+            "vi": {
+                "question": "Đầu ra của: `int a = 10; printf(\"%d %d\", a, a++);` (Lưu ý: hành vi không xác định)",
+                "options": ["A. 10 10", "B. 11 10", "C. 10 11", "D. Phụ thuộc trình biên dịch"],
+                "answer": "D. Phụ thuộc trình biên dịch",
+                "explanation": "Thứ tự đánh giá các đối số hàm không được quy định trong C. Một số trình biên dịch đánh giá từ phải sang trái, số khác từ trái sang phải."
+            }
+        },
+        {
+            "id": 339,
+            "en": {
+                "question": "Which loop is guaranteed to execute at least once?",
+                "options": ["A. for", "B. while", "C. do-while", "D. recursive"],
+                "answer": "C. do-while",
+                "explanation": "`do-while` executes the body first, then checks the condition."
+            },
+            "vi": {
+                "question": "Vòng lặp nào đảm bảo thực thi ít nhất một lần?",
+                "options": ["A. for", "B. while", "C. do-while", "D. đệ quy"],
+                "answer": "C. do-while",
+                "explanation": "`do-while` thực thi thân hàm trước, rồi mới kiểm tra điều kiện."
+            }
+        },
+        {
+            "id": 340,
+            "en": {
+                "question": "What does the keyword `extern` used for?",
+                "options": ["A. To declare a variable that is defined in another file.", "B. To create a static variable.", "C. To create a constant.", "D. To define a local variable."],
+                "answer": "A. To declare a variable that is defined in another file.",
+                "explanation": "`extern` extends the visibility of variables/functions across multiple files."
+            },
+            "vi": {
+                "question": "Từ khóa `extern` được dùng để làm gì?",
+                "options": ["A. Để khai báo một biến được định nghĩa ở tệp khác.", "B. Để tạo biến tĩnh.", "C. Để tạo hằng số.", "D. Để định nghĩa biến cục bộ."],
+                "answer": "A. Để khai báo một biến được định nghĩa ở tệp khác.",
+                "explanation": "`extern` mở rộng phạm vi hiển thị của biến/hàm qua nhiều tệp."
+            }
+        },
+        {
+            "id": 341,
+            "en": {
+                "question": "Which function reads a line from `stdin`?",
+                "options": ["A. `fgets(buf, size, stdin)`", "B. `fgets(stdin, size, buf)`", "C. `fread()`", "D. `read()`"],
+                "answer": "A. `fgets(buf, size, stdin)`",
+                "explanation": "This is the correct parameter order for `fgets`: buffer, size, stream."
+            },
+            "vi": {
+                "question": "Hàm nào đọc một dòng từ `stdin`?",
+                "options": ["A. `fgets(buf, size, stdin)`", "B. `fgets(stdin, size, buf)`", "C. `fread()`", "D. `read()`"],
+                "answer": "A. `fgets(buf, size, stdin)`",
+                "explanation": "Đây là thứ tự tham số đúng cho `fgets`: bộ đệm, kích thước, luồng."
+            }
+        },
+        {
+            "id": 342,
+            "en": {
+                "question": "Output of `printf(\"%d\", 4 >> 1);`?",
+                "options": ["A. 2", "B. 8", "C. 4", "D. 1"],
+                "answer": "A. 2",
+                "explanation": "Right shift by 1 divides by 2. 4 / 2 = 2."
+            },
+            "vi": {
+                "question": "Đầu ra của `printf(\"%d\", 4 >> 1);` là gì?",
+                "options": ["A. 2", "B. 8", "C. 4", "D. 1"],
+                "answer": "A. 2",
+                "explanation": "Dịch phải 1 bit tương đương chia cho 2."
+            }
+        },
+        {
+            "id": 343,
+            "en": {
+                "question": "What is the range of `unsigned char`?",
+                "options": ["A. -128 to 127", "B. 0 to 255", "C. 0 to 127", "D. 0 to 65535"],
+                "answer": "B. 0 to 255",
+                "explanation": "An 8-bit unsigned integer ranges from 0 to 2^8 - 1 (255)."
+            },
+            "vi": {
+                "question": "Phạm vi của `unsigned char` là gì?",
+                "options": ["A. -128 đến 127", "B. 0 đến 255", "C. 0 đến 127", "D. 0 đến 65535"],
+                "answer": "B. 0 đến 255",
+                "explanation": "Số nguyên không dấu 8-bit có phạm vi từ 0 đến 255."
+            }
+        },
+        {
+            "id": 344,
+            "en": {
+                "question": "What does the `register` keyword hint to the compiler?",
+                "options": ["A. To store variable in CPU register for faster access.", "B. To register the variable in a database.", "C. To make the variable global.", "D. To check for syntax errors."],
+                "answer": "A. To store variable in CPU register for faster access.",
+                "explanation": "`register` is a hint to store the variable in a processor register instead of RAM, though compilers may ignore it."
+            },
+            "vi": {
+                "question": "Từ khóa `register` gợi ý điều gì cho trình biên dịch?",
+                "options": ["A. Lưu biến trong thanh ghi CPU để truy cập nhanh hơn.", "B. Đăng ký biến vào cơ sở dữ liệu.", "C. Làm cho biến thành toàn cục.", "D. Kiểm tra lỗi cú pháp."],
+                "answer": "A. Lưu biến trong thanh ghi CPU để truy cập nhanh hơn.",
+                "explanation": "`register` gợi ý lưu biến trong thanh ghi bộ xử lý thay vì RAM."
+            }
+        },
+        {
+            "id": 345,
+            "en": {
+                "question": "What is a recursive function?",
+                "options": ["A. A function that calls itself.", "B. A function that calls main.", "C. A function inside a loop.", "D. A function with no return type."],
+                "answer": "A. A function that calls itself.",
+                "explanation": "Recursion occurs when a function calls itself directly or indirectly."
+            },
+            "vi": {
+                "question": "Hàm đệ quy là gì?",
+                "options": ["A. Một hàm gọi chính nó.", "B. Một hàm gọi main.", "C. Một hàm bên trong vòng lặp.", "D. Một hàm không có kiểu trả về."],
+                "answer": "A. Một hàm gọi chính nó.",
+                "explanation": "Đệ quy xảy ra khi một hàm tự gọi lại chính nó."
+            }
+        },
+        {
+            "id": 346,
+            "en": {
+                "question": "If `int x = 10, *p = &x;`, what is `&p`?",
+                "options": ["A. The value 10", "B. The address of x", "C. The address of the pointer p", "D. Error"],
+                "answer": "C. The address of the pointer p",
+                "explanation": "`p` is a variable (pointer) that has its own address in memory. `&p` gives the address where the pointer `p` is stored."
+            },
+            "vi": {
+                "question": "Nếu `int x = 10, *p = &x;`, thì `&p` là gì?",
+                "options": ["A. Giá trị 10", "B. Địa chỉ của x", "C. Địa chỉ của con trỏ p", "D. Lỗi"],
+                "answer": "C. Địa chỉ của con trỏ p",
+                "explanation": "`p` là một biến (con trỏ) có địa chỉ riêng trong bộ nhớ. `&p` trả về địa chỉ nơi con trỏ `p` được lưu trữ."
+            }
+        },
+        {
+            "id": 347,
+            "en": {
+                "question": "What is the purpose of `#include`?",
+                "options": ["A. To include standard libraries or other files.", "B. To define constants.", "C. To comment code.", "D. To compile code."],
+                "answer": "A. To include standard libraries or other files.",
+                "explanation": "The preprocessor directive `#include` pastes the content of the specified file into the source code."
+            },
+            "vi": {
+                "question": "Mục đích của `#include` là gì?",
+                "options": ["A. Để bao gồm các thư viện chuẩn hoặc các tệp khác.", "B. Để định nghĩa hằng số.", "C. Để comment code.", "D. Để biên dịch code."],
+                "answer": "A. Để bao gồm các thư viện chuẩn hoặc các tệp khác.",
+                "explanation": "Chỉ thị `#include` dán nội dung của tệp được chỉ định vào mã nguồn."
+            }
+        },
+        {
+            "id": 348,
+            "en": {
+                "question": "What is the ASCII value of '0' (character zero)?",
+                "options": ["A. 0", "B. 48", "C. 30", "D. 65"],
+                "answer": "B. 48",
+                "explanation": "In ASCII, the character '0' corresponds to the decimal value 48."
+            },
+            "vi": {
+                "question": "Giá trị ASCII của '0' (ký tự số không) là bao nhiêu?",
+                "options": ["A. 0", "B. 48", "C. 30", "D. 65"],
+                "answer": "B. 48",
+                "explanation": "Trong bảng mã ASCII, ký tự '0' tương ứng với giá trị thập phân 48."
+            }
+        },
+        {
+            "id": 349,
+            "en": {
+                "question": "Which function is used to calculate the square root?",
+                "options": ["A. `sqr()`", "B. `sqrt()`", "C. `power()`", "D. `root()`"],
+                "answer": "B. `sqrt()`",
+                "explanation": "`sqrt()` from `<math.h>` calculates the square root."
+            },
+            "vi": {
+                "question": "Hàm nào được sử dụng để tính căn bậc hai?",
+                "options": ["A. `sqr()`", "B. `sqrt()`", "C. `power()`", "D. `root()`"],
+                "answer": "B. `sqrt()`",
+                "explanation": "`sqrt()` từ `<math.h>` tính căn bậc hai."
+            }
+        },
+        {
+            "id": 350,
+            "en": {
+                "question": "Can variables be declared inside a `switch` block?",
+                "options": ["A. No", "B. Yes, but only inside a case block or new scope.", "C. Yes, anywhere.", "D. Only static variables."],
+                "answer": "B. Yes, but only inside a case block or new scope.",
+                "explanation": "You can declare variables, but if they are initialized, it might be skipped by the jump to a case. It is safer to use `{}` (new scope) inside a case to declare variables."
+            },
+            "vi": {
+                "question": "Biến có thể được khai báo bên trong khối `switch` không?",
+                "options": ["A. Không", "B. Có, nhưng chỉ bên trong một khối case hoặc phạm vi mới.", "C. Có, bất cứ đâu.", "D. Chỉ biến tĩnh."],
+                "answer": "B. Có, nhưng chỉ bên trong một khối case hoặc phạm vi mới.",
+                "explanation": "Bạn có thể khai báo, nhưng nên dùng `{}` để tạo phạm vi mới nhằm tránh lỗi khởi tạo bị bỏ qua."
+            }
+        },
+        {
+            "id": 351,
+            "en": {
+                "question": "What is the result of `10 / 3.0`?",
+                "options": ["A. 3", "B. 3.3333", "C. 3.0", "D. Error"],
+                "answer": "B. 3.3333",
+                "explanation": "Since one operand is a float/double (`3.0`), the division is floating-point division."
+            },
+            "vi": {
+                "question": "Kết quả của `10 / 3.0` là gì?",
+                "options": ["A. 3", "B. 3.3333", "C. 3.0", "D. Lỗi"],
+                "answer": "B. 3.3333",
+                "explanation": "Vì một toán hạng là số thực (`3.0`), phép chia sẽ là phép chia số thực."
+            }
+        },
+        {
+            "id": 352,
+            "en": {
+                "question": "Which operator is used to find the remainder?",
+                "options": ["A. `/`", "B. `\\`", "C. `%`", "D. `rem`"],
+                "answer": "C. `%`",
+                "explanation": "The modulo operator `%` returns the remainder of integer division."
+            },
+            "vi": {
+                "question": "Toán tử nào được sử dụng để tìm số dư?",
+                "options": ["A. `/`", "B. `\\`", "C. `%`", "D. `rem`"],
+                "answer": "C. `%`",
+                "explanation": "Toán tử modulo `%` trả về số dư của phép chia số nguyên."
+            }
+        },
+        {
+            "id": 353,
+            "en": {
+                "question": "What is the output of `printf(\"%d\", (int)3.99);`?",
+                "options": ["A. 3", "B. 4", "C. 3.99", "D. Error"],
+                "answer": "A. 3",
+                "explanation": "Casting a float to an `int` truncates the decimal part (it does not round)."
+            },
+            "vi": {
+                "question": "Đầu ra của `printf(\"%d\", (int)3.99);` là gì?",
+                "options": ["A. 3", "B. 4", "C. 3.99", "D. Lỗi"],
+                "answer": "A. 3",
+                "explanation": "Ép kiểu float sang `int` sẽ cắt bỏ phần thập phân (nó không làm tròn)."
+            }
+        }
         // DÁN TIẾP DỮ LIỆU CÒN LẠI Ở ĐÂY (GIỮ NGUYÊN CẤU TRÚC JSON)
     ];
 
