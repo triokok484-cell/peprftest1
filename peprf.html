@@ -3540,41 +3540,23 @@
         }
     },
 {
-        "id": 199,
-        "topic": "Control Flow (Loops/If)",
-        "en": {
-            "question": "What is the output when the sample code below is executed?",
-            // Đã sửa: i < x thành i &lt; x
-            "code": "int main(){\n    int x=10, i;\n    for(i=9; i &lt; x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-            "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
-            "answer": "A. 9",
-            "explanation": "The loop starts with i=9. The condition 9 < 10 is true. printf prints 9, then i becomes 10 (i++). The break statement executes immediately, exiting the loop."
-        },
-        "vi": {
-            "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
-            // Đã sửa: i < x thành i &lt; x
-            "code": "int main(){\n    int x=10, i;\n    for(i=9; i &lt; x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-            "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
-            "answer": "A. 9",
-            "explanation": "Vòng lặp bắt đầu với i=9. Điều kiện 9 < 10 đúng. printf in ra 9, sau đó i tăng lên 10 (do i++). Lệnh break thực thi ngay lập tức, thoát vòng lặp."
-        }
+    "id": 199,
+    "topic": "Control Flow (Loops/If)",
+    "en": {
+        "question": "What is the output when the sample code below is executed?",
+        "code": "int main(){\n    int x=10, i;\n    for(i=9; i &lt; x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+        "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
+        "answer": "A. 9",
+        "explanation": "The loop starts with i=9. The condition 9 < 10 is true. printf prints 9, then i becomes 10 (i++). The break statement executes immediately, exiting the loop."
     },
-    {
-        "id": 200,
-        "en": {
-            "question": "What is the output when the sample code below is executed?",
-            "code": "int main(){\n    int i = 10;\n    do {\n        printf(\"%d \", i);\n        i -= 2;\n    } while (i >= 1);\n    return 0;\n}",
-            "options": ["A. 10 8 6 4 2", "B. 10 8 6 4 2 0", "C. Infinite loop", "D. 10 9 8 7 6 5 4 3 2"],
-            "answer": "A. 10 8 6 4 2",
-            "explanation": "The code prints `i` then decrements it by 2. The loop continues as long as `i >= 1`. It will print 10, 8, 6, 4, 2. When `i` becomes 0, the condition `0 >= 1` is false, and the loop terminates."
-        },
-        "vi": {
-            "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
-            "code": "int main(){\n    int i = 10;\n    do {\n        printf(\"%d \", i);\n        i -= 2;\n    } while (i >= 1);\n    return 0;\n}",
-            "options": ["A. 10 8 6 4 2", "B. 10 8 6 4 2 0", "C. Vòng lặp vô hạn", "D. 10 9 8 7 6 5 4 3 2"],
-            "answer": "A. 10 8 6 4 2",
-            "explanation": "Đoạn mã in ra `i` rồi giảm `i` đi 2. Vòng lặp tiếp tục miễn là `i >= 1`. Nó sẽ in 10, 8, 6, 4, 2. Khi `i` trở thành 0, điều kiện `0 >= 1` là sai, và vòng lặp kết thúc."
-        }
+    "vi": {
+        "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
+        "code": "int main(){\n    int x=10, i;\n    for(i=9; i &lt; x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+        "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
+        "answer": "A. 9",
+        "explanation": "Vòng lặp bắt đầu với i=9. Điều kiện 9 < 10 đúng. printf in ra 9, sau đó i tăng lên 10 (do i++). Lệnh break thực thi ngay lập tức, thoát vòng lặp."
+    }
+}
     },
     {
         "id": 201,
