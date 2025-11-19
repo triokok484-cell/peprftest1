@@ -6169,6 +6169,63 @@
     function renderMapActiveState() { if (state.quizPhase !== 'active') return; document.querySelectorAll('.map-btn').forEach(b => b.classList.remove('active')); const b = document.getElementById(`map-btn-${state.currentQuizIndex}`); if (b) b.classList.add('active'); }
     
     init();
+    // ======================================================
+// SCRIPT SỬA LỖI CỤ THỂ (ID 215 & 243)
+// Dán đoạn này vào sau biến quizData
+// ======================================================
+(function fixSpecificQuestions() {
+    // 1. Sửa câu 215 (Bị mất điều kiện i<x trong vòng for)
+    const q215 = quizData.find(q => q.id === 215);
+    if (q215) {
+        q215.topic = "Control Flow (Loops/If)";
+        q215.en = {
+            "question": "What is the output when the sample code below is executed?",
+            "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+            "options": ["9", "8", "12", "10"],
+            "answer": "A",
+            "explanation": "Loop starts at i=9. Condition 9<10 is true. Print 9. i becomes 10. Break loop."
+        };
+        q215.vi = {
+            "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
+            "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+            "options": ["9", "8", "12", "10"],
+            "answer": "A",
+            "explanation": "Vòng lặp chạy với i=9. Điều kiện 9<10 đúng. In ra 9. i tăng lên 10. Gặp break thoát vòng lặp."
+        };
+    }
+
+    // 2. Sửa câu 243 (Câu hỏi ma trận 3x3 - Tính tổng đường chéo chính)
+    const q243 = quizData.find(q => q.id === 243);
+    if (q243) {
+        q243.topic = "Arrays & Strings";
+        q243.en = {
+            "question": "Consider a 3x3 matrix `mat`. The code snippet is executed to calculate a value named `sum`. Which option correctly describes the value of `sum`?",
+            "code": "int sum = 0;\nfor (int i = 0; i < 3; i++)\n    sum += mat[i][i];",
+            "options": [
+                "The sum of diagonal elements in the matrix",
+                "The sum of all elements in the matrix",
+                "The sum of non-diagonal elements",
+                "The sum of elements below the main diagonal"
+            ],
+            "answer": "A",
+            "explanation": "mat[i][i] refers to elements where row index equals column index (0,0), (1,1), (2,2). This represents the main diagonal."
+        };
+        q243.vi = {
+            "question": "Xem xét một ma trận 3x3 `mat`. Đoạn mã dưới đây tính giá trị `sum`. Lựa chọn nào mô tả đúng giá trị của tổng này?",
+            "code": "int sum = 0;\nfor (int i = 0; i < 3; i++)\n    sum += mat[i][i];",
+            "options": [
+                "Tổng các phần tử trên đường chéo chính",
+                "Tổng tất cả các phần tử trong ma trận",
+                "Tổng các phần tử không nằm trên đường chéo",
+                "Tổng các phần tử dưới đường chéo chính"
+            ],
+            "answer": "A",
+            "explanation": "mat[i][i] truy cập các phần tử có chỉ số hàng bằng chỉ số cột (0,0), (1,1), (2,2). Đây là các phần tử nằm trên đường chéo chính."
+        };
+    }
+
+    console.log("Đã sửa xong câu 215 và 243!");
+})();
 </script>
 </body>
 </html>
