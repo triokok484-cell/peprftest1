@@ -3808,22 +3808,21 @@
         }
     },
     {
-    "id": 215,
-    "topic": "Control Flow (Loops/If)",
-    "en": {
-        "question": "What is the output when the sample code below is executed?",
-        "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-        "options": ["9", "8", "12", "10"],
-        "answer": "A",
-        "explanation": "Loop starts with i=9. Condition i<x (9<10) is true. 'printf' prints 9, then i increments to 10. 'break' terminates the loop immediately."
-    },
-    "vi": {
-        "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
-        "code": "int main(){\n    int x=10, i;\n    for(i=9; i<x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-        "options": ["9", "8", "12", "10"],
-        "answer": "A",
-        "explanation": "Vòng lặp bắt đầu với i=9. Điều kiện i<x (9<10) đúng. Lệnh printf in ra 9, sau đó i tăng lên 10 (do i++). Lệnh break kết thúc vòng lặp ngay lập tức."
-    }
+        "id": 215,
+        "en": {
+            "question": "What is the output when the sample code below is executed?",
+            "code": "int main(){\n    int x=10, i;\n    for(i=0; i &lt; x; i+=3){\n        printf(\"One\");\n        continue;\n        printf(\"Two\");\n    }\n    return 0;\n}",
+            "options": ["A. OneOneOneOne", "B. OneTwoOneTwo", "C. OneTwoOneTwoOne", "D. OneTwo"],
+            "answer": "A. OneOneOneOne",
+            "explanation": "The continue statement immediately jumps to the next iteration of the loop, skipping the printf(\"Two\") statement. The loop runs for i = 0, 3, 6, 9 (4 times). Thus, \"One\" is printed 4 times."
+        },
+        "vi": {
+            "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
+            "code": "int main(){\n    int x=10, i;\n    for(i=0; i &lt; x; i+=3){\n        printf(\"One\");\n        continue;\n        printf(\"Two\");\n    }\n    return 0;\n}",
+            "options": ["A. OneOneOneOne", "B. OneTwoOneTwo", "C. OneTwoOneTwoOne", "D. OneTwo"],
+            "answer": "A. OneOneOneOne",
+            "explanation": "Lệnh continue sẽ ngay lập tức nhảy đến lần lặp tiếp theo, bỏ qua lệnh printf(\"Two\"). Vòng lặp chạy khi i = 0, 3, 6, 9 (4 lần). Vậy \"One\" được in 4 lần."
+        }
     },
     {
         "id": 216,
