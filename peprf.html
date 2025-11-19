@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRF192 - Ultimate Review Tool</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #28a745;
+            --light-bg: #f8f9fa;
+            --dark-text: #212529;
+            --light-text: #6c757d;
+            --border-color: #dee2e6;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .quiz-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 90%;
+            max-width: 800px;
+            padding: 30px;
+            overflow: hidden;
+            border-top: 5px solid var(--primary-color);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .lang-switcher button {
+            background-color: #e9ecef;
+            border: 1px solid var(--border-color);
+            color: var(--dark-text);
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .lang-switcher button:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 25px;
+            margin-bottom: 5px;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 12px;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            border-radius: 25px;
+            transition: width 0.4s ease-in-out;
+        }
+        .question-counter {
+            text-align: right;
+            font-size: 14px;
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .question-card {
+            margin-bottom: 20px;
+        }
+        #question-text {
+            font-size: 19px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: "SF Mono", "Fira Code", "Courier New", Courier, monospace;
+            font-size: 14px;
+            border: 1px solid #444;
+        }
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .options-list li {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: default;
+            transition: background-color 0.3s, border-color 0.3s, transform 0.2s;
+            position: relative;
+            padding-left: 45px;
+        }
+        .options-list li::before {
+            counter-increment: list-item;
+            content: counter(list-item, upper-alpha);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        body { counter-reset: list-item; }
+        
+        .answer-section {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e6f7ff;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 0 5px 5px 0;
+        }
+        .answer-section strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .answer-section em {
+             display: block;
+             margin-top: 10px;
+             line-height: 1.5;
+             font-style: normal;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        .nav-btn, #toggle-answer-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #toggle-answer-btn {
+            background-color: var(--secondary-color);
+        }
+        .nav-btn:hover, #toggle-answer-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .nav-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .quiz-container {
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 20px;
+            }
+            .nav-btn, #toggle-answer-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            #question-text {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <div class="header">
+            <h1>PRF192 Review</h1>
+            <div class="lang-switcher">
+                <button id="lang-btn">Dịch sang Tiếng Việt</button>
+            </div>
+        </div>
+        
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div class="question-counter" id="question-counter"></div>
+
+        <div class="question-card">
+            <p id="question-text"></p>
+            <div id="code-block-wrapper"></div>
+            <ul class="options-list" id="options-list"></ul>
+        </div>
+
+        <div class="answer-section" id="answer-section">
+            <strong id="answer-title">Correct Answer:</strong> <span id="answer-text"></span>
+            <em id="explanation-text"></em>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn">Previous</button>
+            <button id="toggle-answer-btn">Show Answer</button>
+            <button class="nav-btn" id="next-btn">Next</button>
+        </div>
+    </div>
+
+    <script>
+    let currentQuestionIndex = 0;
+    let isVietnamese = false;
+
+    const questionTextEl = document.getElementById('question-text');
+    const codeBlockWrapperEl = document.getElementById('code-block-wrapper');
+    const optionsListEl = document.getElementById('options-list');
+    const answerSectionEl = document.getElementById('answer-section');
+    const answerTextEl = document.getElementById('answer-text');
+    const explanationTextEl = document.getElementById('explanation-text');
+    const questionCounterEl = document.getElementById('question-counter');
+    const progressBarEl = document.getElementById('progress-bar');
+    
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const toggleAnswerBtn = document.getElementById('toggle-answer-btn');
+    const langBtn = document.getElementById('lang-btn');
+
+    const translations = {
+        prevBtn: { en: "Previous", vi: "Câu Trước" },
+        nextBtn: { en: "Next", vi: "Câu Kế" },
+        toggleAnswerShow: { en: "Show Answer", vi: "Xem Đáp Án" },
+        toggleAnswerHide: { en: "Hide Answer", vi: "Ẩn Đáp Án" },
+        answerTitle: { en: "Correct Answer:", vi: "Đáp Án Đúng:" },
+        langBtnToVi: { en: "Dịch sang Tiếng Việt", vi: "Dịch sang Tiếng Việt" },
+        langBtnToEn: { en: "Switch to English", vi: "Switch to English" },
+        questionCounter: { en: "Question", vi: "Câu hỏi" },
+        explanation: { en: "Explanation", vi: "Giải thích" }
+    };
+
+    function loadQuestion() {
+        hideAnswer();
+        document.body.counterReset = 'list-item 0';
+        const currentQuestion = quizData[currentQuestionIndex];
+        const questionData = isVietnamese ? currentQuestion.vi : currentQuestion.en;
+        
+        questionTextEl.innerHTML = questionData.question;
+        
+        codeBlockWrapperEl.innerHTML = '';
+        if (currentQuestion.en.code) { // Use a single source for code to avoid translation issues
+            const pre = document.createElement('pre');
+            pre.textContent = currentQuestion.en.code;
+            codeBlockWrapperEl.appendChild(pre);
+        }
+
+        optionsListEl.innerHTML = '';
+        questionData.options.forEach(option => {
+            const li = document.createElement('li');
+            li.innerHTML = option;
+            optionsListEl.appendChild(li);
+        });
+
+        answerTextEl.innerHTML = questionData.answer;
+        
+        const explanationTitle = isVietnamese ? translations.explanation.vi : translations.explanation.en;
+        explanationTextEl.innerHTML = `<strong>${explanationTitle}:</strong> ${questionData.explanation}`;
+        
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const counterText = isVietnamese ? translations.questionCounter.vi : translations.questionCounter.en;
+        questionCounterEl.textContent = `${counterText} ${currentQuestionIndex + 1} / ${quizData.length}`;
+        const progressPercent = ((currentQuestionIndex + 1) / quizData.length) * 100;
+        progressBarEl.style.width = `${progressPercent}%`;
+
+        prevBtn.disabled = currentQuestionIndex === 0;
+        nextBtn.disabled = currentQuestionIndex === quizData.length - 1;
+    }
+
+    function toggleAnswer() {
+        answerSectionEl.style.display === 'block' ? hideAnswer() : showAnswer();
+    }
+
+    function showAnswer() {
+        answerSectionEl.style.display = 'block';
+        toggleAnswerBtn.textContent = isVietnamese ? translations.toggleAnswerHide.vi : translations.toggleAnswerHide.en;
+    }
+
+    function hideAnswer() {
+        answerSectionEl.style.display = 'none';
+        toggleAnswerBtn.textContent = isVietnamese ? translations.toggleAnswerShow.vi : translations.toggleAnswerShow.en;
+    }
+
+    function switchLanguage() {
+        isVietnamese = !isVietnamese;
+        updateLanguageUI();
+        loadQuestion();
+    }
+
+    function updateLanguageUI() {
+        if (isVietnamese) {
+            prevBtn.textContent = translations.prevBtn.vi;
+            nextBtn.textContent = translations.nextBtn.vi;
+            langBtn.textContent = translations.langBtnToEn.vi;
+            document.getElementById('answer-title').textContent = translations.answerTitle.vi;
+            toggleAnswerBtn.textContent = answerSectionEl.style.display === 'block' ? translations.toggleAnswerHide.vi : translations.toggleAnswerShow.vi;
+        } else {
+            prevBtn.textContent = translations.prevBtn.en;
+            nextBtn.textContent = translations.nextBtn.en;
+            langBtn.textContent = translations.langBtnToVi.en;
+            document.getElementById('answer-title').textContent = translations.answerTitle.en;
+            toggleAnswerBtn.textContent = answerSectionEl.style.display === 'block' ? translations.toggleAnswerHide.en : translations.toggleAnswerShow.en;
+        }
+    }
+
+    prevBtn.addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            loadQuestion();
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentQuestionIndex < quizData.length - 1) {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+    });
+
+    toggleAnswerBtn.addEventListener('click', toggleAnswer);
+    langBtn.addEventListener('click', switchLanguage);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+            nextBtn.click();
+        } else if (e.key === ' ') {
+            e.preventDefault(); // Prevent page scroll
+            toggleAnswerBtn.click();
+        }
+    });
+
+    const quizData = [
+        // Dữ liệu JSON được nhúng vào đây
+        {
+    "id": 1,
+    "en": {
+        "question": "In C programming, a variable is frequently used to store the address of another variable. What is the name of this variable?",
+        "options": ["A. Pointer", "B. Address", "C. Integer", "D. Byte"],
+        "answer": "A. Pointer",
+        "explanation": "A Pointer is a special variable used to store the memory address of another variable."
+    },
+    "vi": {
+        "question": "Trong lập trình C, một biến thường được sử dụng để lưu địa chỉ của một biến khác. Tên của biến này là gì?",
+        "options": ["A. Con trỏ (Pointer)", "B. Địa chỉ (Address)", "C. Số nguyên (Integer)", "D. Byte"],
+        "answer": "A. Con trỏ (Pointer)",
+        "explanation": "Con trỏ (Pointer) là một biến đặc biệt dùng để lưu trữ địa chỉ bộ nhớ của một biến khác."
+    }
+},
+{
+    "id": 2,
+    "en": {
+        "question": "The function `islower()` returns a non-zero value if a character is:",
+        "options": ["A. A lowercase letter", "B. An uppercase letter", "C. A digit", "D. A punctuation character"],
+        "answer": "A. A lowercase letter",
+        "explanation": "The `islower()` function in the `<ctype.h>` library checks if a character is a lowercase letter."
+    },
+    "vi": {
+        "question": "Hàm `islower()` trả về một giá trị khác không nếu một ký tự là:",
+        "options": ["A. Một chữ cái viết thường", "B. Một chữ cái viết hoa", "C. Một chữ số", "D. Một ký tự chấm câu"],
+        "answer": "A. Một chữ cái viết thường",
+        "explanation": "Hàm `islower()` trong thư viện `<ctype.h>` kiểm tra xem một ký tự có phải là chữ thường hay không."
+    }
+},
+{
+    "id": 3,
+    "en": {
+        "question": "To generate a random integer, you need to declare the _____ library and then you can use the rand() function.",
+        "options": ["A. stdio.h", "B. stdlib.h", "C. ctype.h", "D. conio.h"],
+        "answer": "B. stdlib.h",
+        "explanation": "The `rand()` and `srand()` functions for generating random numbers are defined in the `<stdlib.h>` library."
+    },
+    "vi": {
+        "question": "Để tạo một số nguyên ngẫu nhiên, bạn cần khai báo thư viện _____ và sau đó bạn có thể sử dụng hàm rand().",
+        "options": ["A. stdio.h", "B. stdlib.h", "C. ctype.h", "D. conio.h"],
+        "answer": "B. stdlib.h",
+        "explanation": "Hàm `rand()` và `srand()` để tạo số ngẫu nhiên được định nghĩa trong thư viện `<stdlib.h>`."
+    }
+},
+{
+    "id": 4,
+    "en": {
+        "question": "What translates a C source file into machine language so that the computer can execute it?",
+        "options": ["A. A compiler", "B. A text editor", "C. A file", "D. A program"],
+        "answer": "A. A compiler",
+        "explanation": "A compiler's job is to translate source code from a high-level language (like C) into machine language."
+    },
+    "vi": {
+        "question": "Cái gì dịch một tệp nguồn C thành ngôn ngữ máy để máy tính có thể thực thi nó?",
+        "options": ["A. Một trình biên dịch (compiler)", "B. Một trình soạn thảo văn bản (text editor)", "C. Một tệp (file)", "D. Một chương trình (program)"],
+        "answer": "A. Một trình biên dịch (compiler)",
+        "explanation": "Nhiệm vụ của trình biên dịch (compiler) là dịch mã nguồn từ ngôn ngữ bậc cao (như C) sang ngôn ngữ máy."
+    }
+},
+{
+    "id": 5,
+    "en": {
+        "question": "What benefit does `#define` offer when dealing with magic values in code?",
+        "options": ["A. It improves code portability and readability", "B. It makes the code shorter", "C. It prevents the use of symbolic names", "D. It increases code complexity"],
+        "answer": "A. It improves code portability and readability",
+        "explanation": "Using `#define` to create named constants makes the code easier to read and maintain. If a value needs to be changed, it only needs to be updated in one place."
+    },
+    "vi": {
+        "question": "Lợi ích mà `#define` mang lại khi xử lý các 'giá trị ma thuật' (magic values) trong code là gì?",
+        "options": ["A. Nó cải thiện tính di động và khả năng đọc của mã", "B. Nó làm cho mã ngắn hơn", "C. Nó ngăn chặn việc sử dụng tên tượng trưng", "D. Nó làm tăng độ phức tạp của mã"],
+        "answer": "A. Nó cải thiện tính di động và khả năng đọc của mã",
+        "explanation": "Sử dụng `#define` để tạo các hằng số có tên giúp mã dễ đọc, dễ bảo trì hơn. Khi cần thay đổi giá trị, ta chỉ cần sửa ở một nơi duy nhất."
+    }
+},
+{
+    "id": 6,
+    "en": {
+        "question": "What is the purpose of the `sizeof` operator in C?",
+        "options": ["A. It returns the size of a variable in bytes", "B. It returns the value of a variable", "C. It declares the size of an array", "D. It calculates the sum of two numbers"],
+        "answer": "A. It returns the size of a variable in bytes",
+        "explanation": "The `sizeof` operator returns the size (in bytes) of a data type or a variable."
+    },
+    "vi": {
+        "question": "Mục đích của toán tử `sizeof` trong C là gì?",
+        "options": ["A. Nó trả về kích thước của một biến tính bằng byte", "B. Nó trả về giá trị của một biến", "C. Nó khai báo kích thước của một mảng", "D. Nó tính tổng của hai số"],
+        "answer": "A. Nó trả về kích thước của một biến tính bằng byte",
+        "explanation": "Toán tử `sizeof` trả về kích thước (số byte) của một kiểu dữ liệu hoặc một biến."
+    }
+},
+{
+    "id": 7,
+    "en": {
+        "question": "What is the scope of a global variable in C?",
+        "options": ["A. Throughout the entire program", "B. Only within the function where it's declared", "C. Only within the block where it's declared", "D. Within the structure where it's defined"],
+        "answer": "A. Throughout the entire program",
+        "explanation": "A global variable is declared outside all functions and can be accessed from anywhere in the program after its declaration point."
+    },
+    "vi": {
+        "question": "Phạm vi của một biến toàn cục trong C là gì?",
+        "options": ["A. Toàn bộ chương trình", "B. Chỉ trong hàm mà nó được khai báo", "C. Chỉ trong khối lệnh mà nó được khai báo", "D. Trong cấu trúc nơi nó được định nghĩa"],
+        "answer": "A. Toàn bộ chương trình",
+        "explanation": "Biến toàn cục được khai báo bên ngoài tất cả các hàm và có thể được truy cập từ bất kỳ đâu trong chương trình sau điểm khai báo của nó."
+    }
+},
+{
+    "id": 8,
+    "en": {
+        "question": "What is the primary difference between global and local variables in C?",
+        "options": ["A. Global variables have a wider scope and can be accessed from any function, while local variables are limited to their function's scope.", "B. Global variables are initialized automatically to zero, while local variables require explicit initialization.", "C. Both A and B are correct.", "D. Both A and B are incorrect."],
+        "answer": "C. Both A and B are correct.",
+        "explanation": "Both statements A and B accurately describe the differences between global and local variables."
+    },
+    "vi": {
+        "question": "Sự khác biệt chính giữa biến toàn cục và biến cục bộ trong C là gì?",
+        "options": ["A. Biến toàn cục có phạm vi rộng hơn và có thể được truy cập từ bất kỳ hàm nào, trong khi biến cục bộ bị giới hạn trong phạm vi của hàm chứa chúng.", "B. Biến toàn cục được khởi tạo tự động bằng 0, trong khi biến cục bộ yêu cầu khởi tạo tường minh.", "C. Cả A và B đều đúng.", "D. Cả A và B đều sai."],
+        "answer": "C. Cả A và B đều đúng.",
+        "explanation": "Cả hai phát biểu A và B đều mô tả chính xác sự khác biệt giữa biến toàn cục và biến cục bộ."
+    }
+},
+{
+    "id": 9,
+    "en": {
+        "question": "What is incorrect about pointer?",
+        "options": ["A. Pointers are containers for storing data values, like numbers and characters.", "B. If one variable contains the address of another variable, the first variable is said to point to the second.", "C. A pointer provides an indirect method of accessing the value of a data item.", "D. Pointers can point to variables of other fundamental data types or data aggregates like arrays or structures."],
+        "answer": "A. Pointers are containers for storing data values, like numbers and characters.",
+        "explanation": "This statement is false. Pointers store memory addresses, not the data values themselves."
+    },
+    "vi": {
+        "question": "Điều nào sau đây không đúng về con trỏ?",
+        "options": ["A. Con trỏ là các 'vật chứa' để lưu trữ các giá trị dữ liệu, như số và ký tự.", "B. Nếu một biến chứa địa chỉ của một biến khác, biến đầu tiên được gọi là trỏ đến biến thứ hai.", "C. Con trỏ cung cấp một phương pháp gián tiếp để truy cập giá trị của một mục dữ liệu.", "D. Con trỏ có thể trỏ đến các biến của các kiểu dữ liệu cơ bản khác hoặc các tập hợp dữ liệu như mảng hoặc cấu trúc."],
+        "answer": "A. Con trỏ là các 'vật chứa' để lưu trữ các giá trị dữ liệu, như số và ký tự.",
+        "explanation": "Phát biểu này sai. Con trỏ lưu trữ địa chỉ bộ nhớ, không phải giá trị dữ liệu trực tiếp."
+    }
+},
+{
+    "id": 10,
+    "en": {
+        "question": "What is the correct order of the main components in a function?",
+        "options": ["A. Return type, function name, parameters, and function body.", "B. Return type, function name, return value, and function body.", "C. Return type, function name, parameters, and return value.", "D. Return value, function name, parameters, and function body."],
+        "answer": "A. Return type, function name, parameters, and function body.",
+        "explanation": "This is the standard structure of a function definition in C."
+    },
+    "vi": {
+        "question": "Thứ tự đúng của các thành phần chính trong một hàm là gì?",
+        "options": ["A. Kiểu trả về, tên hàm, tham số và thân hàm.", "B. Kiểu trả về, tên hàm, giá trị trả về và thân hàm.", "C. Kiểu trả về, tên hàm, tham số và giá trị trả về.", "D. Giá trị trả về, tên hàm, tham số và thân hàm."],
+        "answer": "A. Kiểu trả về, tên hàm, tham số và thân hàm.",
+        "explanation": "Đây là cấu trúc chuẩn của một định nghĩa hàm trong C."
+    }
+},
+{
+    "id": 11,
+    "en": {
+        "question": "What is the maximum size required to store the string \"Hello\" in C?",
+        "options": ["A. 5 bytes", "B. 6 bytes", "C. 4 bytes", "D. 10 bytes"],
+        "answer": "B. 6 bytes",
+        "explanation": "The string \"Hello\" has 5 characters. In C, a string is always terminated by a null character `\\0`. Therefore, 5 + 1 = 6 bytes are required."
+    },
+    "vi": {
+        "question": "Kích thước tối đa cần thiết để lưu trữ chuỗi \"Hello\" trong C là bao nhiêu?",
+        "options": ["A. 5 byte", "B. 6 byte", "C. 4 byte", "D. 10 byte"],
+        "answer": "B. 6 byte",
+        "explanation": "Chuỗi \"Hello\" có 5 ký tự. Trong C, một chuỗi ký tự luôn kết thúc bằng ký tự null `\\0`. Do đó, cần 5 + 1 = 6 byte."
+    }
+},
+{
+    "id": 12,
+    "en": {
+        "question": "What is incorrect about `getchar()` function?",
+        "options": ["A. The `getchar()` function is defined in the `<stdio.h>` header file.", "B. `getchar()` gets a string from stdin.", "C. `getchar()` retrieves a single character from the standard input stream buffer without translating the input.", "D. `getchar()` gets a character (an unsigned char) from stdin."],
+        "answer": "B. `getchar()` gets a string from stdin.",
+        "explanation": "`getchar()` reads only a single character, not a string."
+    },
+    "vi": {
+        "question": "Điều nào sau đây không đúng về hàm `getchar()`?",
+        "options": ["A. Hàm `getchar()` được định nghĩa trong tệp tiêu đề `<stdio.h>`.", "B. `getchar()` lấy một chuỗi từ stdin.", "C. `getchar()` lấy một ký tự duy nhất từ bộ đệm đầu vào tiêu chuẩn mà không cần dịch đầu vào.", "D. `getchar()` lấy một ký tự (một char không dấu) từ stdin."],
+        "answer": "B. `getchar()` lấy một chuỗi từ stdin.",
+        "explanation": "`getchar()` chỉ đọc một ký tự duy nhất, không phải một chuỗi."
+    }
+},
+{
+    "id": 13,
+    "en": {
+        "question": "What is the incorrect definition?",
+        "options": ["A. Algorithm: a way to find out a solution.", "B. Data: Values are used to describe information. So, information can be called as the mean of data.", "C. Solution: A situation in which something is hidden.", "D. Information: Knowledge about something."],
+        "answer": "B and C.",
+        "explanation": "Statements B and C are nonsensical and are not correct definitions in computer science."
+    },
+    "vi": {
+        "question": "Định nghĩa nào sau đây là không chính xác?",
+        "options": ["A. Thuật toán: một cách để tìm ra một giải pháp.", "B. Dữ liệu: Các giá trị được sử dụng để mô tả thông tin. Do đó, thông tin có thể được gọi là giá trị trung bình của dữ liệu.", "C. Giải pháp: Một tình huống trong đó một cái gì đó bị ẩn.", "D. Thông tin: Kiến thức về một cái gì đó."],
+        "answer": "B và C.",
+        "explanation": "Phát biểu B và C không có ý nghĩa và không phải là định nghĩa chính xác trong khoa học máy tính."
+    }
+},
+{
+    "id": 14,
+    "en": {
+        "question": "What is correct about the heap?",
+        "options": ["A. One of the sections of a program in an object file or in memory, which contains executable instructions.", "B. Common Variables All functions can access them.", "C. Dynamic allocated data through explicit statements for memory allocation.", "D. Variables are defined in functions. They will exist only when the function is executed and they will be removed when the function completes the execution."],
+        "answer": "C. Dynamic allocated data through explicit statements for memory allocation.",
+        "explanation": "The heap is the memory region used for dynamic memory allocation, using functions like `malloc`, `calloc`, and `realloc`."
+    },
+    "vi": {
+        "question": "Điều nào sau đây là đúng về `heap`?",
+        "options": ["A. Một trong những phần của một chương trình trong tệp đối tượng hoặc trong bộ nhớ, chứa các lệnh có thể thực thi.", "B. Các biến chung mà tất cả các hàm có thể truy cập.", "C. Dữ liệu được cấp phát động thông qua các câu lệnh rõ ràng để cấp phát bộ nhớ.", "D. Các biến được định nghĩa trong các hàm..."],
+        "answer": "C. Dữ liệu được cấp phát động thông qua các câu lệnh rõ ràng để cấp phát bộ nhớ.",
+        "explanation": "Heap là vùng nhớ được sử dụng cho việc cấp phát bộ nhớ động (dynamic memory allocation) bằng các hàm như `malloc`, `calloc`, `realloc`."
+    }
+},
+{
+    "id": 15,
+    "en": {
+        "question": "What is the `main()` function in C?",
+        "options": ["A. It is the function where the program's execution starts.", "B. Every program has exactly one main function.", "C. The main function always returns an integer value or void.", "D. All answers are correct."],
+        "answer": "D. All answers are correct.",
+        "explanation": "All of the above statements correctly describe the `main()` function."
+    },
+    "vi": {
+        "question": "Hàm `main()` trong C là gì?",
+        "options": ["A. Nó là hàm mà chương trình bắt đầu thực thi.", "B. Mỗi chương trình có chính xác một hàm main.", "C. Hàm main luôn trả về một giá trị số nguyên hoặc void.", "D. Tất cả các câu trả lời đều đúng."],
+        "answer": "D. Tất cả các câu trả lời đều đúng.",
+        "explanation": "Tất cả các phát biểu trên đều mô tả đúng về hàm `main()`."
+    }
+},
+{
+    "id": 16,
+    "en": {
+        "question": "What is the size of a float variable in bytes?",
+        "options": ["A. 2 bytes", "B. 1 byte", "C. 8 bytes", "D. 4 bytes"],
+        "answer": "D. 4 bytes",
+        "explanation": "According to the IEEE 754 standard, a single-precision `float` type typically occupies 4 bytes."
+    },
+    "vi": {
+        "question": "Kích thước của một biến kiểu `float` là bao nhiêu byte?",
+        "options": ["A. 2 byte", "B. 1 byte", "C. 8 byte", "D. 4 byte"],
+        "answer": "D. 4 byte",
+        "explanation": "Theo chuẩn IEEE 754, kiểu `float` (single-precision) thường chiếm 4 byte."
+    }
+},
+{
+    "id": 17,
+    "en": {
+        "question": "Which of these is not a loop in C programming language?",
+        "options": ["A. While", "B. Do while", "C. For", "D. Repeat until"],
+        "answer": "D. Repeat until",
+        "explanation": "C does not have a `Repeat until` loop structure. This structure exists in other languages like Pascal."
+    },
+    "vi": {
+        "question": "Cái nào sau đây không phải là một vòng lặp trong ngôn ngữ lập trình C?",
+        "options": ["A. While", "B. Do while", "C. For", "D. Repeat until"],
+        "answer": "D. Repeat until",
+        "explanation": "C không có cấu trúc vòng lặp `Repeat until`. Cấu trúc này có trong một số ngôn ngữ khác như Pascal."
+    }
+},
+{
+    "id": 18,
+    "en": {
+        "question": "Which is a function in C language?",
+        "options": ["A. `is_prime()`", "B. `#include()`", "C. `int()`", "D. `if()`"],
+        "answer": "A. `is_prime()`",
+        "explanation": "`is_prime()` is a valid user-defined function name. The other options are a preprocessor directive, a data type keyword, and a conditional statement."
+    },
+    "vi": {
+        "question": "Cái nào là một hàm trong ngôn ngữ C?",
+        "options": ["A. `is_prime()`", "B. `#include()`", "C. `int()`", "D. `if()`"],
+        "answer": "A. `is_prime()`",
+        "explanation": "`is_prime()` là một tên hàm hợp lệ do người dùng định nghĩa. Các lựa chọn khác là chỉ thị tiền xử lý, từ khóa kiểu dữ liệu, và câu lệnh điều kiện."
+    }
+},
+{
+    "id": 19,
+    "en": {
+        "question": "Which character is commonly used to mark the end of a string in C?",
+        "options": ["A. `\\0`", "B. `\\n`", "C. `\\t`", "D. `\\`"],
+        "answer": "A. `\\0`",
+        "explanation": "The null character `\\0` is used to mark the termination of a string."
+    },
+    "vi": {
+        "question": "Ký tự nào thường được sử dụng để đánh dấu sự kết thúc của một chuỗi trong C?",
+        "options": ["A. `\\0`", "B. `\\n`", "C. `\\t`", "D. `\\`"],
+        "answer": "A. `\\0`",
+        "explanation": "Ký tự null `\\0` được dùng để đánh dấu kết thúc của một chuỗi."
+    }
+},
+{
+    "id": 20,
+    "en": {
+        "question": "Which of the following statements is incorrect?",
+        "options": ["A. To make our programs longer, we use higher-level languages.", "B. Program code in a high level language can not run, it must be translated to binary code (machine code) before running.", "C. C is based on a view of structured programming.", "D. Programs that perform relatively simple tasks and are written in assembly language contain a large number of statements."],
+        "answer": "A. To make our programs longer, we use higher-level languages.",
+        "explanation": "This statement is nonsensical. High-level languages are used to make programming easier and more abstract, not to make code longer."
+    },
+    "vi": {
+        "question": "Phát biểu nào sau đây là không chính xác?",
+        "options": ["A. Để làm cho các chương trình của chúng ta dài hơn, chúng ta sử dụng các ngôn ngữ cấp cao.", "B. Mã chương trình trong ngôn ngữ cấp cao không thể chạy, nó phải được dịch sang mã nhị phân (mã máy) trước khi chạy.", "C. C dựa trên quan điểm lập trình có cấu trúc.", "D. Các chương trình thực hiện các nhiệm vụ tương đối đơn giản và được viết bằng hợp ngữ chứa một số lượng lớn các câu lệnh."],
+        "answer": "A. Để làm cho các chương trình của chúng ta dài hơn, chúng ta sử dụng các ngôn ngữ cấp cao.",
+        "explanation": "Phát biểu này vô nghĩa. Ngôn ngữ cấp cao được sử dụng để giúp lập trình dễ dàng hơn, không phải để làm code dài ra."
+    }
+},
+{
+    "id": 21,
+    "en": {
+        "question": "Which is not a type of bus in a computer?",
+        "options": ["A. Address bus", "B. Signal bus", "C. Control bus", "D. Data bus"],
+        "answer": "B. Signal bus",
+        "explanation": "The main types of buses in computer architecture are the Address Bus, Data Bus, and Control Bus. 'Signal bus' is not a standard term."
+    },
+    "vi": {
+        "question": "Cái nào không phải là một loại bus trong máy tính?",
+        "options": ["A. Bus địa chỉ", "B. Bus tín hiệu", "C. Bus điều khiển", "D. Bus dữ liệu"],
+        "answer": "B. Bus tín hiệu",
+        "explanation": "Các loại bus chính trong kiến trúc máy tính là Bus địa chỉ, Bus dữ liệu, và Bus điều khiển. 'Bus tín hiệu' không phải là một thuật ngữ chuẩn."
+    }
+},
+{
+    "id": 22,
+    "en": {
+        "question": "Which of the following functions provide buffered input facilities on the standard input stream?",
+        "options": ["A. getchar(), scanf()", "B. getchar(), fgets()", "C. scanf(), fgetc()", "D. fgets(), fgetc()"],
+        "answer": "B. getchar(), fgets()",
+        "explanation": "Both `getchar` and `fgets` are buffered input functions, meaning they read data from a buffer rather than directly from the input device."
+    },
+    "vi": {
+        "question": "Hàm nào sau đây cung cấp các phương tiện nhập có bộ đệm trên luồng nhập chuẩn?",
+        "options": ["A. getchar(), scanf()", "B. getchar(), fgets()", "C. scanf(), fgetc()", "D. fgets(), fgetc()"],
+        "answer": "B. getchar(), fgets()",
+        "explanation": "Cả `getchar` và `fgets` đều là các hàm nhập có bộ đệm, nghĩa là chúng đọc dữ liệu từ một bộ đệm thay vì trực tiếp từ thiết bị nhập."
+    }
+},
+{
+    "id": 23,
+    "en": {
+        "question": "Which is incorrect statement in C programming?",
+        "options": ["A. `#define` is a preprocessor command often used to introduce named constants.", "B. `double` and `goto` are keywords for declaring data type.", "C. `return 0;` is normally the last statement in main().", "D. The file `stdio.h` is the library where the compiler finds `scanf()`."],
+        "answer": "B. `double` and `goto` are keywords for declaring data type.",
+        "explanation": "`double` is a keyword for a data type, but `goto` is a keyword for a jump statement, not a data type."
+    },
+    "vi": {
+        "question": "Phát biểu nào không chính xác trong lập trình C?",
+        "options": ["A. `#define` là một lệnh tiền xử lý thường được sử dụng để giới thiệu các hằng số có tên.", "B. `double` và `goto` là các từ khóa để khai báo kiểu dữ liệu.", "C. `return 0;` thường là câu lệnh cuối cùng trong main().", "D. Tệp `stdio.h` là thư viện nơi trình biên dịch tìm thấy `scanf()`."],
+        "answer": "B. `double` và `goto` là các từ khóa để khai báo kiểu dữ liệu.",
+        "explanation": "`double` là từ khóa cho kiểu dữ liệu, nhưng `goto` là từ khóa cho câu lệnh nhảy, không phải kiểu dữ liệu."
+    }
+},
+{
+    "id": 24,
+    "en": {
+        "question": "How are strings typically represented in C?",
+        "options": ["A. As an array of characters", "B. As an array of strings", "C. As individual characters", "D. As integers referencing ASCII values"],
+        "answer": "A. As an array of characters",
+        "explanation": "In C, a string is represented as an array of characters (`char`) ending with the null character `\\0`."
+    },
+    "vi": {
+        "question": "Chuỗi ký tự thường được biểu diễn như thế nào trong C?",
+        "options": ["A. Dưới dạng một mảng các ký tự", "B. Dưới dạng một mảng các chuỗi", "C. Dưới dạng các ký tự riêng lẻ", "D. Dưới dạng các số nguyên tham chiếu đến giá trị ASCII"],
+        "answer": "A. Dưới dạng một mảng các ký tự",
+        "explanation": "Trong C, một chuỗi được biểu diễn dưới dạng một mảng các ký tự (`char`) và kết thúc bằng ký tự null `\\0`."
+    }
+},
+{
+    "id": 25,
+    "en": {
+        "question": "How do you declare a variable in C language?",
+        "options": ["A. All variables must be declared before we use them in C program.", "B. To declare a variable you specify its name and data type it can store.", "C. All variables are always stored on the stack.", "D. A and B"],
+        "answer": "D. A and B",
+        "explanation": "Both A and B are fundamental rules for declaring variables in C. C is incorrect because variables can be dynamically allocated on the heap or exist in the data segment (global/static variables)."
+    },
+    "vi": {
+        "question": "Làm thế nào để bạn khai báo một biến trong ngôn ngữ C?",
+        "options": ["A. Tất cả các biến phải được khai báo trước khi chúng ta sử dụng chúng trong chương trình C.", "B. Để khai báo một biến, bạn chỉ định tên và kiểu dữ liệu mà nó có thể lưu trữ.", "C. Tất cả các biến luôn được lưu trữ trên stack.", "D. A và B"],
+        "answer": "D. A và B",
+        "explanation": "Cả A và B đều là các quy tắc cơ bản khi khai báo biến trong C. C sai vì biến có thể được cấp phát động trên heap hoặc trong phân đoạn dữ liệu (biến toàn cục/static)."
+    }
+},
+{
+    "id": 26,
+    "en": {
+        "question": "How many bytes to represent float data type in c?",
+        "options": ["A. 1 byte", "B. 2 bytes", "C. 4 bytes", "D. 8 bytes"],
+        "answer": "C. 4 bytes",
+        "explanation": "A standard `float` type occupies 4 bytes."
+    },
+    "vi": {
+        "question": "Cần bao nhiêu byte để biểu diễn kiểu dữ liệu `float` trong C?",
+        "options": ["A. 1 byte", "B. 2 bytes", "C. 4 bytes", "D. 8 bytes"],
+        "answer": "C. 4 bytes",
+        "explanation": "Kiểu `float` tiêu chuẩn chiếm 4 byte."
+    }
+},
+{
+    "id": 27,
+    "en": {
+        "question": "When a C program compiles without any errors or warnings, it means that the syntax of the program is correct... However, a program can still produce incorrect results if there are _____ in the code.",
+        "options": ["A. compilation errors", "B. runtime errors", "C. logic or semantic errors", "D. interpreter errors"],
+        "answer": "C. logic or semantic errors",
+        "explanation": "A logic error is a bug in the program's algorithm or reasoning. The program runs but produces the wrong output."
+    },
+    "vi": {
+        "question": "Khi một chương trình C biên dịch mà không có lỗi hay cảnh báo nào, điều đó có nghĩa là cú pháp của chương trình là chính xác... Tuy nhiên, chương trình vẫn có thể tạo ra kết quả không chính xác nếu có _____ trong mã.",
+        "options": ["A. lỗi biên dịch (compilation errors)", "B. lỗi thời gian chạy (runtime errors)", "C. lỗi logic hoặc ngữ nghĩa (logic or semantic errors)", "D. lỗi trình thông dịch (interpreter errors)"],
+        "answer": "C. lỗi logic hoặc ngữ nghĩa (logic or semantic errors)",
+        "explanation": "Lỗi logic là lỗi trong thuật toán hoặc cách suy luận của lập trình viên. Chương trình chạy được nhưng cho ra kết quả sai."
+    }
+},
+{
+    "id": 28,
+    "en": {
+        "question": "Errors that occur due to syntax errors belong to which of the following?",
+        "options": ["A. Compile time error", "B. Run time error", "C. Input error", "D. Linking error"],
+        "answer": "A. Compile time error",
+        "explanation": "The compiler detects syntax errors (violations of the language rules) during the compilation phase."
+    },
+    "vi": {
+        "question": "Các lỗi xảy ra do lỗi cú pháp thuộc loại nào sau đây?",
+        "options": ["A. Lỗi thời gian biên dịch (Compile time error)", "B. Lỗi thời gian chạy (Run time error)", "C. Lỗi nhập liệu (Input error)", "D. Lỗi liên kết (Linking error)"],
+        "answer": "A. Lỗi thời gian biên dịch (Compile time error)",
+        "explanation": "Trình biên dịch sẽ phát hiện các lỗi cú pháp (vi phạm quy tắc ngôn ngữ) trong quá trình biên dịch."
+    }
+},
+{
+    "id": 29,
+    "en": {
+        "question": "Choose the correct statement related to the array.",
+        "options": ["A. Arrays provide constant-time access to elements.", "B. Arrays allow for dynamic resizing during runtime.", "C. Arrays can store elements of different data types.", "D. Arrays automatically adjust their size based on the number of elements."],
+        "answer": "A. Arrays provide constant-time access to elements.",
+        "explanation": "Any element in an array can be accessed via its index in constant time (O(1)). The other statements are false for standard C arrays."
+    },
+    "vi": {
+        "question": "Chọn câu lệnh đúng liên quan đến mảng.",
+        "options": ["A. Mảng cung cấp quyền truy cập thời gian hằng số vào các phần tử.", "B. Mảng cho phép thay đổi kích thước động trong thời gian chạy.", "C. Mảng có thể lưu trữ các phần tử của các kiểu dữ liệu khác nhau.", "D. Mảng tự động điều chỉnh kích thước của chúng dựa trên số lượng phần tử."],
+        "answer": "A. Mảng cung cấp quyền truy cập thời gian hằng số vào các phần tử.",
+        "explanation": "Có thể truy cập bất kỳ phần tử nào của mảng thông qua chỉ số của nó trong thời gian không đổi (O(1)). Các phát biểu khác đều sai đối với mảng trong C."
+    }
+},
+{
+    "id": 30,
+    "en": {
+        "question": "Values used to describe information in programming are typically referred to as",
+        "options": ["A. Data", "B. Information", "C. Algorithm", "D. Computer program"],
+        "answer": "A. Data",
+        "explanation": "Data are the raw values used to represent information."
+    },
+    "vi": {
+        "question": "Các giá trị được sử dụng để mô tả thông tin trong lập trình thường được gọi là gì?",
+        "options": ["A. Dữ liệu (Data)", "B. Thông tin (Information)", "C. Thuật toán (Algorithm)", "D. Chương trình máy tính (Computer program)"],
+        "answer": "A. Dữ liệu (Data)",
+        "explanation": "Dữ liệu (Data) là các giá trị thô được sử dụng để biểu diễn thông tin."
+    }
+},
+{
+    "id": 31,
+    "en": {
+        "question": "During the compilation process, what will be done with comments?",
+        "options": ["A. The comment mark will be removed. The content of the comments will be compiled line by line.", "B. The comment is treated as an array of characters.", "C. Comments are removed in the pre-processing step.", "D. Each comment is compiled as a statement that does nothing."],
+        "answer": "C. Comments are removed in the pre-processing step.",
+        "explanation": "The preprocessor strips all comments from the source code before the actual compilation begins."
+    },
+    "vi": {
+        "question": "Trong quá trình biên dịch, điều gì sẽ được thực hiện với các comment?",
+        "options": ["A. Dấu comment sẽ bị xóa. Nội dung của comment sẽ được biên dịch từng dòng một.", "B. Comment được coi như một mảng ký tự.", "C. Comment được loại bỏ ở bước tiền xử lý.", "D. Mỗi comment được biên dịch thành một câu lệnh không làm gì cả."],
+        "answer": "C. Comment được loại bỏ ở bước tiền xử lý.",
+        "explanation": "Bộ tiền xử lý sẽ loại bỏ tất cả các comment khỏi mã nguồn trước khi quá trình biên dịch thực sự bắt đầu."
+    }
+},
+{
+    "id": 32,
+    "en": {
+        "question": "Which keyword can be used to make a variable unchangeable/read-only?",
+        "options": ["A. final", "B. readonly", "C. constant", "D. const"],
+        "answer": "D. const",
+        "explanation": "The `const` keyword is used to declare constants."
+    },
+    "vi": {
+        "question": "Từ khóa nào có thể được sử dụng để làm cho một biến không thể thay đổi/chỉ đọc?",
+        "options": ["A. final", "B. readonly", "C. constant", "D. const"],
+        "answer": "D. const",
+        "explanation": "Từ khóa `const` được sử dụng để khai báo hằng số."
+    }
+},
+{
+    "id": 33,
+    "en": {
+        "question": "The C++ language is:",
+        "options": ["A. Not case-sensitive.", "B. It depends on the compiler used.", "C. None of the others.", "D. case-sensitive."],
+        "answer": "D. case-sensitive.",
+        "explanation": "Like C, C++ is a case-sensitive language. The variables `myVar` and `myvar` are two different variables."
+    },
+    "vi": {
+        "question": "Ngôn ngữ C++ là:",
+        "options": ["A. Không phân biệt chữ hoa chữ thường.", "B. Tùy thuộc vào trình biên dịch được sử dụng.", "C. Không có câu nào đúng.", "D. Phân biệt chữ hoa chữ thường."],
+        "answer": "D. Phân biệt chữ hoa chữ thường.",
+        "explanation": "Giống như C, C++ là ngôn ngữ phân biệt chữ hoa chữ thường. Biến `myVar` và `myvar` là hai biến khác nhau."
+    }
+},
+{
+    "id": 34,
+    "en": {
+        "question": "C is which kind of language?",
+        "options": ["A. Object-oriented", "B. Machine", "C. Assembly", "D. Procedural"],
+        "answer": "D. Procedural",
+        "explanation": "C is a procedural (or structured) programming language, which focuses on functions and procedures."
+    },
+    "vi": {
+        "question": "C là loại ngôn ngữ nào?",
+        "options": ["A. Hướng đối tượng", "B. Máy", "C. Hợp ngữ", "D. Thủ tục"],
+        "answer": "D. Thủ tục",
+        "explanation": "C là một ngôn ngữ lập trình thủ tục (hay có cấu trúc), tập trung vào các hàm và thủ tục."
+    }
+},
+{
+    "id": 35,
+    "en": {
+        "question": "How do you insert COMMENTS in C code?",
+        "options": ["A. // This is a comment", "B. /* This is a comment */", "C. Both A and B", "D. -- This is a comment"],
+        "answer": "C. Both A and B",
+        "explanation": "C supports single-line comments starting with `//` (from the C99 standard) and multi-line comments enclosed between `/*` and `*/`."
+    },
+    "vi": {
+        "question": "Làm thế nào để bạn chèn COMMENT trong mã C?",
+        "options": ["A. // Đây là một comment", "B. /* Đây là một comment */", "C. Cả A và B", "D. -- Đây là một comment"],
+        "answer": "C. Cả A và B",
+        "explanation": "C hỗ trợ comment một dòng bắt đầu bằng `//` (từ chuẩn C99) và comment nhiều dòng nằm giữa `/*` và `*/`."
+    }
+},
+{
+    "id": 36,
+    "en": {
+        "question": "What is a correct syntax to output \"Hello World\" in C?",
+        "options": ["A. System.out.println(\"Hello World\");", "B. cout << \"Hello World\";", "C. Console.WriteLine(\"Hello World\");", "D. printf(\"Hello World\");"],
+        "answer": "D. printf(\"Hello World\");",
+        "explanation": "A is Java, B is C++, C is C#. `printf` is the standard output function in C."
+    },
+    "vi": {
+        "question": "Cú pháp đúng để xuất \"Hello World\" trong C là gì?",
+        "options": ["A. System.out.println(\"Hello World\");", "B. cout << \"Hello World\";", "C. Console.WriteLine(\"Hello World\");", "D. printf(\"Hello World\");"],
+        "answer": "D. printf(\"Hello World\");",
+        "explanation": "A là Java, B là C++, C là C#. `printf` là hàm xuất chuẩn trong C."
+    }
+},
+{
+    "id": 37,
+    "en": {
+        "question": "Which of the following statements is true?",
+        "options": ["A. A word is the size of the general registers in CPU.", "B. None of the others.", "C. A byte is the size of the general registers in CPU.", "D. A nibble is the size of the general registers in CPU."],
+        "answer": "A. A word is the size of the general registers in CPU.",
+        "explanation": "The size of a computer 'word' is typically defined by the size of the CPU's registers (e.g., 32-bit or 64-bit)."
+    },
+    "vi": {
+        "question": "Phát biểu nào sau đây là đúng?",
+        "options": ["A. Một word là kích thước của các thanh ghi chung trong CPU.", "B. Không có câu nào đúng.", "C. Một byte là kích thước của các thanh ghi chung trong CPU.", "D. Một nibble là kích thước của các thanh ghi chung trong CPU."],
+        "answer": "A. Một word là kích thước của các thanh ghi chung trong CPU.",
+        "explanation": "Kích thước của một 'word' máy tính thường được định nghĩa bằng kích thước của thanh ghi của CPU (ví dụ: 32-bit hoặc 64-bit)."
+    }
+},
+{
+    "id": 38,
+    "en": {
+        "question": "The translator which translates the entire set of high level statements into an equivalent set of machine language statements... and produce a separate executable file, is:",
+        "options": ["A. Translator", "B. Assembler", "C. Compiler", "D. Interpreter"],
+        "answer": "C. Compiler",
+        "explanation": "This is the precise definition of how a Compiler works. An Interpreter, in contrast, translates and executes line by line."
+    },
+    "vi": {
+        "question": "Trình dịch nào dịch toàn bộ tập hợp các câu lệnh cấp cao thành một tập hợp các câu lệnh ngôn ngữ máy tương đương... và tạo ra một tệp thực thi riêng biệt?",
+        "options": ["A. Trình dịch (Translator)", "B. Trình hợp dịch (Assembler)", "C. Trình biên dịch (Compiler)", "D. Trình thông dịch (Interpreter)"],
+        "answer": "C. Trình biên dịch (Compiler)",
+        "explanation": "Đây là định nghĩa chính xác về cách hoạt động của một trình biên dịch (Compiler). Trình thông dịch (Interpreter) thì dịch và thực thi từng dòng một."
+    }
+},
+{
+    "id": 39,
+    "en": {
+        "question": "Which of the following statements are true about maintainability in good software engineering? (select all correct answers)",
+        "options": ["A. A program can run on any computer", "B. A program is small enough in size", "C. Modifiability", "D. Understandability"],
+        "answer": "C and D.",
+        "explanation": "Maintainability is directly related to how easy the source code is to understand and modify. A relates to portability, and B is not a primary criterion."
+    },
+    "vi": {
+        "question": "Phát biểu nào sau đây là đúng về khả năng bảo trì (maintainability) trong kỹ thuật phần mềm tốt? (chọn tất cả các câu trả lời đúng)",
+        "options": ["A. Một chương trình có thể chạy trên mọi máy tính", "B. Một chương trình đủ nhỏ về kích thước", "C. Khả năng sửa đổi (Modifiability)", "D. Khả năng hiểu được (Understandability)"],
+        "answer": "C và D.",
+        "explanation": "Khả năng bảo trì liên quan trực tiếp đến việc mã nguồn dễ hiểu và dễ sửa đổi như thế nào. A liên quan đến tính di động (portability), B không phải là một tiêu chí chính."
+    }
+},
+{
+    "id": 40,
+    "en": {
+        "question": "Which conversion is not possible?",
+        "options": ["A. float to int", "B. char to float", "C. int to float", "D. All are possible"],
+        "answer": "D. All are possible",
+        "explanation": "C allows type casting between basic numeric types, although information may be lost (e.g., `float` to `int` loses the fractional part)."
+    },
+    "vi": {
+        "question": "Phép chuyển đổi nào là không thể?",
+        "options": ["A. float sang int", "B. char sang float", "C. int sang float", "D. Tất cả đều có thể"],
+        "answer": "D. Tất cả đều có thể",
+        "explanation": "C cho phép ép kiểu giữa các kiểu dữ liệu số cơ bản, mặc dù có thể mất mát thông tin (ví dụ: `float` sang `int` sẽ mất phần thập phân)."
+    }
+},
+{
+    "id": 41,
+    "en": {
+        "question": "What is required in each C program?",
+        "options": ["A. Output data", "B. The program does not require any function.", "C. The program must have at least one function.", "D. Input data"],
+        "answer": "C. The program must have at least one function.",
+        "explanation": "Every C program must have at least the `main()` function, which is the entry point of execution."
+    },
+    "vi": {
+        "question": "Điều gì là bắt buộc trong mỗi chương trình C?",
+        "options": ["A. Dữ liệu đầu ra", "B. Chương trình không yêu cầu bất kỳ hàm nào.", "C. Chương trình phải có ít nhất một hàm.", "D. Dữ liệu đầu vào"],
+        "answer": "C. Chương trình phải có ít nhất một hàm.",
+        "explanation": "Mọi chương trình C phải có ít nhất hàm `main()`, đây là điểm bắt đầu thực thi."
+    }
+},
+{
+    "id": 42,
+    "en": {
+        "question": "C programs are converted into machine language with the help of",
+        "options": ["A. An Editor", "B. A Compiler", "C. A Browser", "D. An operating system"],
+        "answer": "B. A Compiler",
+        "explanation": "The compiler performs this translation task."
+    },
+    "vi": {
+        "question": "Các chương trình C được chuyển đổi thành ngôn ngữ máy với sự trợ giúp của",
+        "options": ["A. Một trình soạn thảo (Editor)", "B. Một trình biên dịch (Compiler)", "C. Một trình duyệt (Browser)", "D. Một hệ điều hành (operating system)"],
+        "answer": "B. Một trình biên dịch (Compiler)",
+        "explanation": "Trình biên dịch thực hiện công việc dịch này."
+    }
+},
+{
+    "id": 43,
+    "en": {
+        "question": "The library `stdio.h` containing functions for printing out data:",
+        "options": ["A. scanf, putchar", "B. putchar, printf", "C. printf, getchar", "D. scanf, printf"],
+        "answer": "B. putchar, printf",
+        "explanation": "`scanf` and `getchar` are input functions. `putchar` and `printf` are output (printing) functions."
+    },
+    "vi": {
+        "question": "Thư viện `stdio.h` chứa các hàm để in ra dữ liệu:",
+        "options": ["A. scanf, putchar", "B. putchar, printf", "C. printf, getchar", "D. scanf, printf"],
+        "answer": "B. putchar, printf",
+        "explanation": "`scanf` và `getchar` là hàm nhập. `putchar` và `printf` là các hàm xuất (in ra) dữ liệu."
+    }
+},
+{
+    "id": 44,
+    "en": {
+        "question": "Choose the correct definition for \"simple data types\" in programming.",
+        "options": ["A. A category of data that represents individual, non-complex elements such as integers, floating-point numbers, and characters.", "B. Storing a collection of elements accessible by an index or a key.", "C. Performing operations and expressions on data.", "D. Changing from one form of representation to another."],
+        "answer": "A. A category of data that represents individual, non-complex elements such as integers, floating-point numbers, and characters.",
+        "explanation": "This is the most accurate definition of simple (or primitive) data types."
+    },
+    "vi": {
+        "question": "Chọn định nghĩa đúng cho \"simple data types\" (kiểu dữ liệu đơn giản) trong lập trình.",
+        "options": ["A. Một loại dữ liệu đại diện cho các yếu tố riêng lẻ, không phức tạp như số nguyên, số thực dấu phẩy động và ký tự.", "B. Lưu trữ một tập hợp các phần tử có thể truy cập bằng một chỉ số hoặc một khóa.", "C. Thực hiện các hoạt động và biểu thức trên dữ liệu.", "D. Thay đổi từ một dạng biểu diễn này sang dạng khác."],
+        "answer": "A. Một loại dữ liệu đại diện cho các yếu tố riêng lẻ, không phức tạp như số nguyên, số thực dấu phẩy động và ký tự.",
+        "explanation": "Đây là định nghĩa chính xác nhất về các kiểu dữ liệu đơn giản (nguyên thủy)."
+    }
+},
+{
+    "id": 45,
+    "en": {
+        "question": "What term is commonly used to specify both the type and name of a variable or constant in a programming language?",
+        "options": ["A. Identification", "B. Name", "C. Declaration", "D. Definition"],
+        "answer": "C. Declaration",
+        "explanation": "A declaration introduces a variable's/function's name and its type to the compiler."
+    },
+    "vi": {
+        "question": "Thuật ngữ nào thường được sử dụng để chỉ định cả loại và tên của một biến hoặc hằng số trong một ngôn ngữ lập trình?",
+        "options": ["A. Nhận dạng (Identification)", "B. Tên (Name)", "C. Khai báo (Declaration)", "D. Định nghĩa (Definition)"],
+        "answer": "C. Khai báo (Declaration)",
+        "explanation": "Khai báo (Declaration) là quá trình giới thiệu một tên biến/hàm và kiểu dữ liệu của nó cho trình biên dịch."
+    }
+}
+    ];
+
+    loadQuestion();
+
+    </script>
+</body>
+</html>
