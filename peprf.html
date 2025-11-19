@@ -1837,19 +1837,32 @@
         }
     },
     {
-        "id": 89,
-        "en": {
-            "question": "Which of the following is a valid code to use to declare and initialize a two-dimensional array?",
-            "options": ["A. `int a[2,3] = [[1,2,3],[4,5,6]];`", "B. `int a[][] = {{1,2,3},{4,5,6}};`", "C. `int a[2][3] = {{1,2,3},{4,5,6}};`", "D. `int a[][3] = {{1,2,3},{4,5,6}};`"],
-            "answer": "C and D are both valid.",
-            "explanation": "C is the full declaration. D is also valid because the compiler can deduce the number of rows (the first dimension) from the initializer list, but the number of columns (the second dimension) must be specified."
-        },
-        "vi": {
-            "question": "Cái nào sau đây là một đoạn mã hợp lệ để khai báo và khởi tạo một mảng hai chiều?",
-            "options": ["A. `int a[2,3] = [[1,2,3],[4,5,6]];`", "B. `int a[][] = {{1,2,3},{4,5,6}};`", "C. `int a[2][3] = {{1,2,3},{4,5,6}};`", "D. `int a[][3] = {{1,2,3},{4,5,6}};`"],
-            "answer": "C và D đều hợp lệ.",
-            "explanation": "C là cách khai báo đầy đủ. D cũng hợp lệ vì trình biên dịch có thể tự suy ra số hàng (chiều thứ nhất) dựa trên dữ liệu khởi tạo, nhưng số cột (chiều thứ hai) phải được chỉ định rõ ràng."
-        }
+    "id": 89,
+    "topic": "Arrays & Strings",
+    "en": {
+        "question": "Which of the following is a valid code to use to declare and initialize a two-dimensional array?",
+        "options": [
+            "int a[2,3] = [[1,2,3],[4,5,6]];",
+            "int a[][] = {{1,2,3},{4,5,6}};",
+            "int a[2][3] = {{1,2,3},{4,5,6}};",
+            "int a[][3] = {{1,2,3},{4,5,6}};",
+            "Both C and D are valid" 
+        ],
+        "answer": "E", // Chọn E sẽ đúng
+        "explanation": "Option C is explicit. Option D allows compiler to deduce row count. Both are valid in C."
+    },
+    "vi": {
+        "question": "Cái nào sau đây là một đoạn mã hợp lệ để khai báo và khởi tạo một mảng hai chiều?",
+        "options": [
+            "int a[2,3] = [[1,2,3],[4,5,6]];",
+            "int a[][] = {{1,2,3},{4,5,6}};",
+            "int a[2][3] = {{1,2,3},{4,5,6}};",
+            "int a[][3] = {{1,2,3},{4,5,6}};",
+            "Cả C và D đều hợp lệ"
+        ],
+        "answer": "E", // Chọn E sẽ đúng
+        "explanation": "C là khai báo đầy đủ. D là khai báo để trình biên dịch tự tính số hàng. Cả 2 đều đúng."
+    }
     },
     {
         "id": 90,
