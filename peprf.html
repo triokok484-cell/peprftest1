@@ -3540,23 +3540,24 @@
         }
     },
 {
-    "id": 199,
-    "topic": "Control Flow (Loops/If)",
-    "en": {
-        "question": "What is the output when the sample code below is executed?",
-        "code": "int main(){\n    int x=10, i;\n    for(i=9; i &lt; x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-        "options": ["9", "8", "12", "10"],
-        "answer": "A",
-        "explanation": "The loop starts with i=9. The condition 9 &lt; 10 is true. printf prints 9, then i becomes 10 (i++). The break statement executes immediately, exiting the loop."
-    },
-    "vi": {
-        "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
-        "code": "int main(){\n    int x=10, i;\n    for(i=9; i &lt; x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-        "options": ["9", "8", "12", "10"],
-        "answer": "A",
-        "explanation": "Vòng lặp bắt đầu với i=9. Điều kiện 9 &lt; 10 đúng. printf in ra 9, sau đó i tăng lên 10 (do i++). Lệnh break thực thi ngay lập tức, thoát vòng lặp."
-    }
-}
+        "id": 199,
+        "topic": "Control Flow (Loops/If)",
+        "en": {
+            "question": "What is the output when the sample code below is executed?",
+            // Đã sửa: i < x thành i &lt; x
+            "code": "int main(){\n    int x=10, i;\n    for(i=9; i &lt; x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+            "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
+            "answer": "A. 9",
+            "explanation": "The loop starts with i=9. The condition 9 < 10 is true. printf prints 9, then i becomes 10 (i++). The break statement executes immediately, exiting the loop."
+        },
+        "vi": {
+            "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
+            // Đã sửa: i < x thành i &lt; x
+            "code": "int main(){\n    int x=10, i;\n    for(i=9; i &lt; x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+            "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
+            "answer": "A. 9",
+            "explanation": "Vòng lặp bắt đầu với i=9. Điều kiện 9 < 10 đúng. printf in ra 9, sau đó i tăng lên 10 (do i++). Lệnh break thực thi ngay lập tức, thoát vòng lặp."
+        }
     },
     {
         "id": 200,
