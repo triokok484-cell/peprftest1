@@ -3540,21 +3540,21 @@
         }
     },
     {
-            "id": 199,
-            "en": {
-                "question": "What is the output when the sample code below is executed?",
-                "code": "int main(){\n    int x=10, i;\n    for(i=9; i < x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-                "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
-                "answer": "A. 9",
-                "explanation": "The loop starts with `i=9`. The condition `9 < 10` is true. `printf(\"%d\", i++)` prints the current value of `i` (9) and then increments `i` to 10. The `break;` statement is then executed, immediately terminating the loop. The second `printf` is never reached."
-            },
-            "vi": {
-                "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
-                "code": "int main(){\n    int x=10, i;\n    for(i=9; i < x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
-                "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
-                "answer": "A. 9",
-                "explanation": "Vòng lặp bắt đầu với `i=9`. Điều kiện `9 < 10` là đúng. `printf(\"%d\", i++)` in ra giá trị hiện tại của `i` (là 9), sau đó tăng `i` lên 10. Lệnh `break;` ngay sau đó được thực thi, kết thúc vòng lặp ngay lập tức. Lệnh `printf` thứ hai không bao giờ được thực thi."
-            }
+        "id": 199,
+        "en": {
+            "question": "What is the output when the sample code below is executed?",
+            "code": "int main(){\n    int x=10, i;\n    for(i=9; i < x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+            "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
+            "answer": "A. 9",
+            "explanation": "The loop starts with i=9. The condition 9 < 10 is true. printf prints 9, then i becomes 10 (i++). The break statement executes immediately, exiting the loop. The second printf is unreachable."
+        },
+        "vi": {
+            "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
+            "code": "int main(){\n    int x=10, i;\n    for(i=9; i < x; i+=3){\n        printf(\"%d\", i++);\n        break;\n        printf(\"%d\", --i);\n    }\n    return 0;\n}",
+            "options": ["A. 9", "B. 8", "C. 12", "D. 10"],
+            "answer": "A. 9",
+            "explanation": "Vòng lặp bắt đầu với i=9. Điều kiện 9 < 10 đúng. printf in ra 9, sau đó i tăng lên 10 (do i++). Lệnh break thực thi ngay lập tức, thoát vòng lặp. Lệnh printf thứ hai không bao giờ chạy."
+        }
     },
     {
         "id": 200,
@@ -3811,17 +3811,17 @@
         "id": 215,
         "en": {
             "question": "What is the output when the sample code below is executed?",
-            "code": "int main(){\n    int x=10, i;\n    for(i=0; i<x; i+=3){\n        printf(\"One\");\n        continue;\n        printf(\"Two\");\n    }\n    return 0;\n}",
+            "code": "int main(){\n    int x=10, i;\n    for(i=0; i < x; i+=3){\n        printf(\"One\");\n        continue;\n        printf(\"Two\");\n    }\n    return 0;\n}",
             "options": ["A. OneOneOneOne", "B. OneTwoOneTwo", "C. OneTwoOneTwoOne", "D. OneTwo"],
             "answer": "A. OneOneOneOne",
-            "explanation": "The `continue` statement immediately jumps to the next iteration of the loop, skipping the `printf(\"Two\")` statement. The loop runs for `i = 0, 3, 6, 9` (4 times). Thus, \"One\" is printed 4 times."
+            "explanation": "The continue statement immediately jumps to the next iteration of the loop, skipping the printf(\"Two\") statement. The loop runs for i = 0, 3, 6, 9 (4 times). Thus, \"One\" is printed 4 times."
         },
         "vi": {
             "question": "Đầu ra khi đoạn mã sau được thực thi là gì?",
-            "code": "int main(){\n    int x=10, i;\n    for(i=0; i<x; i+=3){\n        printf(\"One\");\n        continue;\n        printf(\"Two\");\n    }\n    return 0;\n}",
+            "code": "int main(){\n    int x=10, i;\n    for(i=0; i < x; i+=3){\n        printf(\"One\");\n        continue;\n        printf(\"Two\");\n    }\n    return 0;\n}",
             "options": ["A. OneOneOneOne", "B. OneTwoOneTwo", "C. OneTwoOneTwoOne", "D. OneTwo"],
             "answer": "A. OneOneOneOne",
-            "explanation": "Lệnh `continue` sẽ ngay lập tức nhảy đến lần lặp tiếp theo, bỏ qua lệnh `printf(\"Two\")`. Vòng lặp chạy khi `i = 0, 3, 6, 9` (4 lần). Vậy \"One\" được in 4 lần."
+            "explanation": "Lệnh continue sẽ ngay lập tức nhảy đến lần lặp tiếp theo, bỏ qua lệnh printf(\"Two\"). Vòng lặp chạy khi i = 0, 3, 6, 9 (4 lần). Vậy \"One\" được in 4 lần."
         }
     },
     {
